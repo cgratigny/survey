@@ -1,5 +1,5 @@
 - item_options["items"].sort_by{|sub_item_name, sub_item_options| sub_item_options["item_number"]}.to_h.each do |sub_item_name, sub_item_options|
   - if sub_item_name.start_with?("question")
-    = render "common/survey/show_question", item_options: sub_item_options
+    = render "hummingbird_survey/common/survey/show_question", item_options: sub_item_options
   - elsif sub_item_name.start_with?("section")
-    = render "common/survey/show_section", item_options: sub_item_options
+    = render "hummingbird_survey/common/survey/show_section", item_options: sub_item_options

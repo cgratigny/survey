@@ -3,6 +3,6 @@
 .row
   - page_options["items"].sort_by{|item_name, item_options| item_options["item_number"]}.to_h.each do |item_name, item_options|
     - if item_name.start_with?("question")
-      = render "common/survey/show_question", item_options: item_options
+      = render "hummingbird_survey/common/survey/show_question", item_options: item_options
     - elsif item_name.start_with?("section")
-      = render "common/survey/show_section", item_options: item_options
+      = render "hummingbird_survey/common/survey/show_section", item_options: item_options

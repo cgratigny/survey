@@ -2,4 +2,4 @@
   - if survey_itemable.title.present?
     %h2= survey_itemable.title
   - survey_itemable.survey_items.in_order.each do |item|
-    = render "common/survey/answer_item", f: f, survey_item: item
+    = render "hummingbird_survey/common/survey/answer_item", f: f, survey_item: item
