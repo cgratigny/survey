@@ -7,6 +7,8 @@ require 'hummingbird_survey/models/sectionable.rb'
 require 'hummingbird_survey/models/surveyable.rb'
 require 'hummingbird_survey/models/questionable.rb'
 
+require 'gem_name/engine'
+
 module HummingbirdSurvey
   def self.hi
     puts "Hello world!"

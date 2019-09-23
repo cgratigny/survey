@@ -1,0 +1,29 @@
+#nav-container
+  %nav
+    .side-tab.hidden-xs
+      .row
+        .col-sm-12
+          .side-tab-left.image-font.menu-toggle ¥
+          .side-tab-right.hidden-xs Menu
+    #side-nav-items
+      %div{class: "side-tab"}
+      - f.object.survey_page.survey.survey_pages.each_with_index do |page, i|
+        .side-tab{class: "side-tab-link #{'active' if f.object.survey_page == page}"}
+          .row{"data-path" => '#', class: ("side-save" if true)}
+            .col-sm-12
+              .side-tab-left= page.page_number
+              .side-tab-right= page.title
+
+
+.main-section
+
+  %h1 #{f.object.survey_page.title}
+  %hr
+
+  - f.object.survey_page.survey_items.in_order.each do |survey_item|
+    .col-sm-6.clear
+      = render "common/survey/answer_item", f: f, survey_item: survey_item
+
+  .clear
+  %hr
+  = f.submit "#{@survey_page.last_page? ? "COMPLETE" : "NEXT"}", :class => "btn btn-primary btn-lg pull-right"
