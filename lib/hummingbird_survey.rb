@@ -2,6 +2,6 @@ require 'rails'
 
 require "lib/hummingbird_survey/models/*"
 
-module HomeworkSurvey
+module HummingbirdSurvey
 
 end
