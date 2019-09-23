@@ -1,9 +1,9 @@
 require 'rails'
-require "lib/hummingbird_survey/models/survey_item"
-require "lib/hummingbird_survey/models/survey_note"
-require "lib/hummingbird_survey/models/survey_page"
-require "lib/hummingbird_survey/models/survey_questions"
-require "lib/hummingbird_survey/models/survey_section"
+require "lib/hummingbird_survey/models/survey_item.rb"
+require "lib/hummingbird_survey/models/survey_note.rb"
+require "lib/hummingbird_survey/models/survey_page.rb"
+require "lib/hummingbird_survey/models/survey_questions.rb"
+require "lib/hummingbird_survey/models/survey_section.rb"
 
 module HummingbirdSurvey
   def self.hi
