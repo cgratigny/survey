@@ -6,8 +6,7 @@ require 'hummingbird_survey/models/pagable.rb'
 require 'hummingbird_survey/models/sectionable.rb'
 require 'hummingbird_survey/models/surveyable.rb'
 require 'hummingbird_survey/models/questionable.rb'
-
-require 'hummingbird_survey/engine'
+require 'hummingbird_survey/railtie.rb'
 
 module HummingbirdSurvey
   def self.hi
