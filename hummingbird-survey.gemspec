@@ -6,6 +6,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Gem for shared code for hummingbird and dragonfly surveys}
   s.email = "chris@progettalearn.com".freeze
   s.files = [
+    "lib/hummingbird_survey.rb".freeze,
     "Gemfile",
     "Rakefile",
     "VERSION",
