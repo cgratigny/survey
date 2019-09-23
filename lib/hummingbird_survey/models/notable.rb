@@ -1,6 +1,7 @@
 module HummingbirdSurvey
   module Notable
-
+    extend ActiveSupport::Concern
+    
     included do
       has_one :survey_item, as: :survey_itemable
     end

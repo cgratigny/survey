@@ -1,5 +1,6 @@
 module HummingbirdSurvey
   module Sectionable
+    extend ActiveSupport::Concern
 
     included do
       has_one :survey_item, as: :survey_itemable

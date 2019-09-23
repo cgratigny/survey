@@ -1,7 +1,8 @@
 module HummingbirdSurvey
   module Itemable
+    extend ActiveSupport::Concern
 
-    included do 
+    included do
       belongs_to :parent, polymorphic: true
       belongs_to :survey_itemable, polymorphic: true, dependent: :destroy
 

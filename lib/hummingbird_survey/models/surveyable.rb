@@ -1,5 +1,6 @@
 module HummingbirdSurvey
   class Surveyable
+    extend ActiveSupport::Concern
 
     included do
       belongs_to :surveyable, polymorphic: true
