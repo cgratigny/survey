@@ -1,10 +1,13 @@
 module HummingbirdSurvey
   module Pagable
-    belongs_to :survey
 
-    has_many :survey_items, as: :parent, dependent: :destroy
+    included do
+      belongs_to :survey
 
-    scope :in_order, -> { order("survey_pages.page_number ASC") }
+      has_many :survey_items, as: :parent, dependent: :destroy
+
+      scope :in_order, -> { order("survey_pages.page_number ASC") }
+    end
 
     # to end the recursion for survey_items and children
     def survey_page

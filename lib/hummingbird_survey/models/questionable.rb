@@ -1,14 +1,16 @@
 module HummingbirdSurvey
   module Questionable
 
-    has_one :survey_item, as: :survey_itemable
+    included do
+      has_one :survey_item, as: :survey_itemable
 
-    # want to make sure no show ifs try to reference a question that's not there anymore
-    has_many :show_ifs, dependent: :destroy
+      # want to make sure no show ifs try to reference a question that's not there anymore
+      has_many :show_ifs, dependent: :destroy
 
-    classy_enum_attr :question_type, enum: "SurveyQuestionType", allow_blank: true
+      classy_enum_attr :question_type, enum: "SurveyQuestionType", allow_blank: true
 
-    store_accessor :data, :answer_list
+      store_accessor :data, :answer_list
+    end
 
     def survey_page
       survey_item.present? ? survey_item.survey_page : nil

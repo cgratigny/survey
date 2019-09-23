@@ -1,11 +1,14 @@
 module HummingbirdSurvey
   module Itemable
-    belongs_to :parent, polymorphic: true
-    belongs_to :survey_itemable, polymorphic: true, dependent: :destroy
 
-    has_one :show_if, as: :showable, dependent: :destroy
+    included do 
+      belongs_to :parent, polymorphic: true
+      belongs_to :survey_itemable, polymorphic: true, dependent: :destroy
 
-    scope :in_order, -> { order("item_number ASC") }
+      has_one :show_if, as: :showable, dependent: :destroy
+
+      scope :in_order, -> { order("item_number ASC") }
+    end
 
     def survey_page
       parent.present? ? parent.survey_page : nil

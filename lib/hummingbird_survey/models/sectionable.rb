@@ -1,9 +1,11 @@
 module HummingbirdSurvey
   module Sectionable
 
-    has_one :survey_item, as: :survey_itemable
+    included do
+      has_one :survey_item, as: :survey_itemable
 
-    has_many :survey_items, as: :parent, dependent: :destroy
+      has_many :survey_items, as: :parent, dependent: :destroy
+    end
 
     def survey_page
       survey_item.present? ? survey_item.survey_page : nil

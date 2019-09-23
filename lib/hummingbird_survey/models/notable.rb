@@ -1,6 +1,9 @@
 module HummingbirdSurvey
   module Notable
-    has_one :survey_item, as: :survey_itemable
+
+    included do
+      has_one :survey_item, as: :survey_itemable
+    end
 
     def survey_page
       survey_item.present? ? survey_item.survey_page : nil
