@@ -1,7 +1,5 @@
 module HummingbirdSurvey
   module Notable
-    include Duplicator
-
     has_one :survey_item, as: :survey_itemable
 
     def survey_page

@@ -1,6 +1,5 @@
 module HummingbirdSurvey
   module Pagable
-    include Duplicator
     belongs_to :survey
 
     has_many :survey_items, as: :parent, dependent: :destroy

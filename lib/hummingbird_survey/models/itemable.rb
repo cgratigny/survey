@@ -1,7 +1,5 @@
 module HummingbirdSurvey
   module Itemable
-    include Duplicator
-
     belongs_to :parent, polymorphic: true
     belongs_to :survey_itemable, polymorphic: true, dependent: :destroy
 

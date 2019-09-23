@@ -1,6 +1,5 @@
 module HummingbirdSurvey
   class Surveyable
-    include Duplicator
     
     belongs_to :surveyable, polymorphic: true
 

@@ -1,6 +1,6 @@
 module HummingbirdSurvey
   module Sectionable
-    include Duplicator
+
     has_one :survey_item, as: :survey_itemable
 
     has_many :survey_items, as: :parent, dependent: :destroy

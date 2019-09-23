@@ -1,6 +1,5 @@
 module HummingbirdSurvey
   module Questionable
-    include Duplicator
 
     has_one :survey_item, as: :survey_itemable
 
