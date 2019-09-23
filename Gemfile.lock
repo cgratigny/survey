@@ -1,0 +1,17 @@
+PATH
+  remote: .
+  specs:
+    hummingbird-survey (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  hummingbird-survey!
+
+BUNDLED WITH
+   2.0.2
