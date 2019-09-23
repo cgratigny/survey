@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  class SurveyNote < ApplicationRecord
+  module Notable
     include Duplicator
 
     has_one :survey_item, as: :survey_itemable

@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  class SurveyPage < ApplicationRecord
+  module Pagable
     include Duplicator
     belongs_to :survey
 

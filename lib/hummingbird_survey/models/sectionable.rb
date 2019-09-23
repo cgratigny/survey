@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  class SurveySection < ApplicationRecord
+  module Sectionable
     include Duplicator
     has_one :survey_item, as: :survey_itemable
 

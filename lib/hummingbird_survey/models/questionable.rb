@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  class SurveyQuestion < ApplicationRecord
+  module Questionable
     include Duplicator
 
     has_one :survey_item, as: :survey_itemable

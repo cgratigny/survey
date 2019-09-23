@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  class SurveyItem < ApplicationRecord
+  module Itemable
     include Duplicator
 
     belongs_to :parent, polymorphic: true
