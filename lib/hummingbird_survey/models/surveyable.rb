@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  class Surveyable
+  module Surveyable
     extend ActiveSupport::Concern
 
     included do
