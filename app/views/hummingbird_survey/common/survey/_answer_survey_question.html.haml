@@ -1,7 +1,7 @@
 .field
   - case survey_itemable.question_type
     - when SurveyQuestionType::TextArea.new
-      = f.input "question_#{survey_itemable.id}", as: text, label: survey_itemable.label, required: survey_itemable.required?
+      = f.input "question_#{survey_itemable.id}", as: :text, label: survey_itemable.label, required: survey_itemable.required?
     - when SurveyQuestionType::RadioButtons.new
       = f.input "question_#{survey_itemable.id}", as: :radio_buttons, label: survey_itemable.label, item_wrapper_class: "inline", collection: survey_itemable.answer_list, required: survey_itemable.required?
     - when SurveyQuestionType::Checkbox.new
@@ -9,10 +9,8 @@
     - when SurveyQuestionType::Select.new
       = f.input "question_#{survey_itemable.id}", as: :select, label: survey_itemable.label, required: survey_itemable.required?, item_wrapper_class: "inline", collection: survey_itemable.answer_list, label_method: :to_s, value_method: :to_s, input_html: { "data-placeholder" => "Please Select" }
     - when SurveyQuestionType::CountrySelect.new
-      # Todo: Change this to be a custom form field
       = render "common/address/country_select", form: f, field_name: "question_#{survey_itemable.id}", label: survey_itemable.label, required: survey_itemable.required?, country_select_id: "question_#{survey_itemable.id}_country"
     - when SurveyQuestionType::RegionSelect.new
-      # Todo: Change this to be a custom form field
       = render "common/address/region_select", form: f, field_name: "question_#{survey_itemable.id}", label: survey_itemable.label, required: survey_itemable.required?, country_select_id: "question_#{survey_itemable.country_question_id}_country", country_code: f.object.all_answer_data["question_#{survey_itemable.country_question_id}"]
     - else
       = f.input "question_#{survey_itemable.id}", label: survey_itemable.label, required: survey_itemable.required?
