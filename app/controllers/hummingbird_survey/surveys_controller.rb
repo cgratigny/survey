@@ -1,4 +1,4 @@
-class HummingbirdSurvey::SurveysController < HummingbirdSurveyController
+class HummingbirdSurvey::SurveysController < HummingbirdSurvey::BaseController
   before_action :build_collection, only: :index
   before_action :authorize_multiple, only: :index
 

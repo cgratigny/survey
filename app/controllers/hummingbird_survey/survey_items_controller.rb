@@ -1,4 +1,4 @@
-class HummingbirdSurvey::SurveyItemsController < HummingbirdSurveyController
+class HummingbirdSurvey::SurveyItemsController < HummingbirdSurvey::BaseController
   before_action :find_survey
 
   before_action :find_survey_item, only: [:show, :edit, :update, :destroy, :add_show_if]

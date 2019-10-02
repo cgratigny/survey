@@ -1,4 +1,4 @@
-class HummingbirdSurvey::SurveySectionsController < HummingbirdSurveyController
+class HummingbirdSurvey::SurveySectionsController < HummingbirdSurvey::BaseController
   before_action :find_survey
 
   before_action :build_survey_section, only: [:new, :create]
