@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  module Survey
+  module Survay
     extend ActiveSupport::Concern
 
     included do
