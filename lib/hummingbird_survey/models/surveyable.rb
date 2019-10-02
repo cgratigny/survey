@@ -5,4 +5,5 @@ module HummingbirdSurvey
     included do
       has_one :survey, as: :surveyable, dependent: :destroy
     end
+  end
 end
