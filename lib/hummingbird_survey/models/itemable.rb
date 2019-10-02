@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  module Itemable
+  module Item
     extend ActiveSupport::Concern
 
     included do

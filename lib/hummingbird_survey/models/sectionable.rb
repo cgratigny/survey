@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  module Sectionable
+  module Section
     extend ActiveSupport::Concern
 
     included do
