@@ -1,11 +1,12 @@
 require 'rails'
 
-require 'hummingbird_survey/models/itemable.rb'
-require 'hummingbird_survey/models/notable.rb'
-require 'hummingbird_survey/models/pagable.rb'
-require 'hummingbird_survey/models/sectionable.rb'
+require 'hummingbird_survey/models/item.rb'
+require 'hummingbird_survey/models/note.rb'
+require 'hummingbird_survey/models/page.rb'
+require 'hummingbird_survey/models/section.rb'
+require 'hummingbird_survey/models/survey.rb'
+require 'hummingbird_survey/models/question.rb'
 require 'hummingbird_survey/models/surveyable.rb'
-require 'hummingbird_survey/models/questionable.rb'
 require 'hummingbird_survey/railtie.rb'
 
 module HummingbirdSurvey
