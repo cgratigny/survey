@@ -7,10 +7,9 @@ require 'hummingbird_survey/models/section.rb'
 require 'hummingbird_survey/models/survey.rb'
 require 'hummingbird_survey/models/question.rb'
 require 'hummingbird_survey/models/surveyable.rb'
+require 'hummingbird_survey/config.rb'
 require 'hummingbird_survey/railtie.rb'
 
 module HummingbirdSurvey
-  def self.hi
-    puts "Hello world!"
-  end
+
 end

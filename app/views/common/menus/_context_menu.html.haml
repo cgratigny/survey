@@ -1,0 +1,12 @@
+-links ||= []
+.context-menu
+  .dropdown
+    .dropdown-trigger{"data-toggle" => "dropdown", type: "button"}
+      %span.fas.fa-ellipsis-h
+    .dropdown-menu
+      %ul
+        - links.each do |text, values|
+          - if values[:confirm_delete]
+            %li= link_to text, values[:link], :method => :delete, :data => { :confirm => 'Are you sure?' }
+          - else
+            %li= link_to text, values[:link]

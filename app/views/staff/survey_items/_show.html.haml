@@ -1,0 +1,23 @@
+- links = {}
+- links["Edit Item"] = {link: edit_staff_survey_item_path(@survey, survey_item)}
+- links["Delete Item"] = {link: staff_survey_item_path(@survey, survey_item), confirm_delete: true}
+- if !survey_item.show_if.present?
+  - links["Add Condition"] = {link: add_show_if_staff_survey_item_path(@survey, survey_item)}
+
+.survey-config-block
+  .survey-item-controls
+    .survey-item-label
+      = "#"
+      = survey_item.item_number
+    = render "common/menus/context_menu", links: links
+
+  = render "staff/survey_items/show_itemable", survey_item: survey_item
+
+  .clear
+    - if survey_item.show_if.present?
+      = render "show_ifs/show", show_if: survey_item.show_if
+
+.survey-iten-block
+  .col-sm-12.col-md
+    = simple_form_for SurveyPageForm.new(survey_page: survey_item.survey_page, surveyed: AdmissionPacket.new), url: "#" do |f|
+      = render "hummingbird_survey/common/survey/answer_#{survey_item.survey_itemable_type.underscore}", f: f, survey_itemable: survey_item.survey_itemable

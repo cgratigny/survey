@@ -1,0 +1,28 @@
+-# frozen_string_literal: true
+= simple_form_for [:staff, @survey] do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .block.as-section
+    .form-inputs
+      = f.input :display_name
+
+  .embedded-submit
+    = render "common/global_form_submit", f: f, cancel_path: DynamicPath.new.surveyable_path(@survey)
+
+.survey-config.faux-form
+  - @survey.survey_pages.in_order.each do |page|
+    .block.as-section
+      %h3
+        = page.display_title_with_number
+        = link_to edit_staff_survey_page_path(@survey, page) do
+          %span.fal.fa-edit
+
+      - page.survey_items.in_order.each do |item|
+        .survey-item{class: "survey-item-#{item.survey_itemable_type.underscore.dasherize}"}
+          = render "staff/survey_items/show", survey_item: item
+
+      .button-group
+        = link_to "Add Question", add_question_staff_survey_page_path(@survey, page), class: "btn btn-primary button-group-item"
+        = link_to "Add Note", add_note_staff_survey_page_path(@survey, page), class: "btn btn-primary button-group-item"
+        = link_to "Add Section", add_section_staff_survey_page_path(@survey, page), class: "btn btn-primary button-group-item"

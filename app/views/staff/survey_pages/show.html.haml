@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @survey_page.title
+%p
+  %b Page number:
+  = @survey_page.page_number
+
+= link_to 'Edit', edit_staff_survey_page_path(@survey, @survey_page)
+\|
+= link_to 'Back', edit_staff_survey_path(@survey)

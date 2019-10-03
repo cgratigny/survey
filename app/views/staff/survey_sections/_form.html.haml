@@ -1,0 +1,10 @@
+-# frozen_string_literal: true
+= simple_form_for @survey_section, url: staff_survey_section_path(@survey, @survey_section) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .block.as-section
+    .form-inputs
+      = f.input :title
+
+  = render "common/global_form_submit", f: f

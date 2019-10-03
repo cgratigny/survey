@@ -1,0 +1,8 @@
+.page-content-head
+  %h1 Editing survey_note
+
+  .button-group
+    = link_to 'Back', edit_staff_survey_path(@survey), class: "back-button btn btn-primary button-group-item"
+    = link_to 'Show', staff_survey_note_path(@survey, @survey_note), class: "btn btn-secondary button-group-item align-right"
+
+.primary-form-type.full-page-form.using-blocks= render 'form'

@@ -1,0 +1,23 @@
+- links = {}
+- links["Edit Section"] = {link: edit_staff_survey_section_path(@survey, survey_itemable)}
+- links["Add Question"] = {link: add_question_staff_survey_section_path(@survey, survey_itemable)}
+- links["Add Note"] = {link: add_note_staff_survey_section_path(@survey, survey_itemable)}
+- links["Add Section"] = {link: add_section_staff_survey_section_path(@survey, survey_itemable)}
+
+.survey-section-title
+  %h3 Section
+  %p
+    = link_to edit_staff_survey_section_path(@survey, survey_itemable) do
+      %span.fal.fa-edit
+    %b Title:
+    = survey_itemable.title
+
+.survey-section-content
+  - survey_itemable.survey_items.in_order.each do |item|
+    .survey-item{class: "survey-item-#{item.survey_itemable_type.underscore.dasherize}"}
+      = render "staff/survey_items/show", survey_item: item
+
+.survey-section-footer
+  .survey-item-controls
+    = render "common/menus/context_menu", links: links
+  %h3 End of Section

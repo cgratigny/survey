@@ -1,0 +1,4 @@
+.form-footer
+  = button_tag(type: 'submit', class: "btn btn-lg btn-primary no-border pull-right save btn-sm-full-width", data: { disable_with: "Processing" }) do
+    = (defined? save_text) ? save_text : "Save"
+  = link_to "Cancel", cancel_path, class: "btn btn-lg btn-secondary no-border cancel btn-sm-full-width" if defined?(cancel_path)

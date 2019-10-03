@@ -1,0 +1,15 @@
+-# frozen_string_literal: true
+= simple_form_for @survey_question, url: staff_survey_question_path(@survey, @survey_question) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .block.as-section
+    .form-inputs
+      = f.input :label
+      = f.input :required
+      = f.input :question_type, as: :select, collection: SurveyQuestionType.select_options
+
+      - if f.object.requires_answer_list?
+        = f.input :answer_list
+
+  = render "common/global_form_submit", f: f

@@ -1,0 +1,7 @@
+.survey-notes-title
+  %h4 Note
+.survey-notes-content
+  = link_to edit_staff_survey_note_path(@survey, survey_itemable) do
+    %span.fal.fa-edit
+  %b Content:
+  = survey_itemable.content

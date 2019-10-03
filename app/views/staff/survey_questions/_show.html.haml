@@ -1,0 +1,14 @@
+%h4 Question
+
+= link_to edit_staff_survey_question_path(@survey, survey_itemable) do
+  %span.fal.fa-edit
+
+= survey_itemable.label
+= "(#{survey_itemable.question_type})"
+- if survey_itemable.required?
+  =" *"
+
+- if survey_itemable.requires_answer_list?
+  %p
+    %b Options:
+    = survey_itemable.answer_list
