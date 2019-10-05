@@ -3,8 +3,12 @@
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
-  .form-inputs
-    = f.input :item_number
+  .block.as-section
+    .form-inputs
+      = f.input :item_number
+      = f.input :parent_id
+      = f.input :parent_type
+      = f.object.inspect
 
-  .form-actions
-    = f.button :submit
+
+  = render "common/global_form_submit", cancel_path: edit_staff_survey_path(@survey), f: f

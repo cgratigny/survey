@@ -1,7 +1,7 @@
-%h1 Editing survey_item
+.page-content-head
+  %h1 Editing Survey Item
 
-= render 'form'
+  .head-controls.button-group
+    = link_to 'back', edit_staff_survey_path(@survey), class: "back-button btn btn-primary button-group-item sm-half"
 
-= link_to 'Show', staff_survey_item_path(@survey, @survey_item)
-\|
-= link_to 'Back', edit_staff_survey_path(@survey)
+.primary-form-type.full-page-form.using-blocks= render "form", form_action: "Edit"
