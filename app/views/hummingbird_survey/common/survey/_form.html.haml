@@ -1,16 +1,7 @@
-.survey-user-form.primary-form-type.full-page-form.using-blocks
-  .block.as-section
-    .form-inputs
+%h2.block-heading.survey-page-title #{f.object.survey_page.page_number}/#{f.object.survey_page.survey.survey_pages.count} : #{f.object.survey_page.title}
 
-      .main-section
+- f.object.survey_page.survey_items.in_order.each do |survey_item|
+  = render "hummingbird_survey/common/survey/answer_item", f: f, survey_item: survey_item
 
-        %h1 #{f.object.survey_page.title}
-        %hr
-
-        - f.object.survey_page.survey_items.in_order.each do |survey_item|
-          .col-sm-6.clear
-            = render "hummingbird_survey/common/survey/answer_item", f: f, survey_item: survey_item
-
-        .clear
-        %hr
-        = f.submit "#{@survey_page.last_page? ? "COMPLETE" : "NEXT"}", :class => "btn btn-primary btn-lg pull-right"
+.button-group.actions
+  = f.submit "#{@survey_page.last_page? ? "COMPLETE" : "NEXT"}", :class => "btn btn-primary button-group-item align-right sm-half"
