@@ -1,2 +1,2 @@
-.cell.shrink{class: "#{"hide" unless survey_item.display?(f.object.all_answer_data)}", "data-parent" => survey_item.show_if_parent, "data-op" => survey_item.show_if_op, "data-val" => survey_item.show_if_val}
+.survey-answer-item{class: "#{"hide" unless survey_item.display?(f.object.all_answer_data)}", "data-parent" => survey_item.show_if_parent, "data-op" => survey_item.show_if_op, "data-val" => survey_item.show_if_val}
   = render "hummingbird_survey/common/survey/answer_#{survey_item.survey_itemable_type.underscore}", f: f, survey_itemable: survey_item.survey_itemable
