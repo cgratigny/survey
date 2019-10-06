@@ -8,7 +8,7 @@ module HummingbirdSurvey
     end
 
     def initialize_survey
-      Survey.find_or_create_by!(surveyable: self)
+      self.create_survey!(surveyable: self) unless survey.present?
     end
 
   end
