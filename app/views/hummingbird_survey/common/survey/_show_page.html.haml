@@ -1,8 +1,13 @@
-%h2= "Page #{page_options["page_number"]} - #{page_options["title"]}"
+- edit_link ||= false
+%h2
+  = "Page #{page_options["page_number"]} - #{page_options["title"]}"
+  = link_to "Edit", edit_link if edit_link
 
-.row
+.survey-review-page
   - page_options["items"].sort_by{|item_name, item_options| item_options["item_number"]}.to_h.each do |item_name, item_options|
     - if item_name.start_with?("question")
-      = render "hummingbird_survey/common/survey/show_question", item_options: item_options
+      .survey-review-answer
+        = render "hummingbird_survey/common/survey/show_question", item_options: item_options
     - elsif item_name.start_with?("section")
-      = render "hummingbird_survey/common/survey/show_section", item_options: item_options
+      .survey-review-section
+        = render "hummingbird_survey/common/survey/show_section", item_options: item_options
