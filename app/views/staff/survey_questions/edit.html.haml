@@ -1,8 +1,7 @@
 .page-content-head
-  %h1 Editing survey_question
+  %h1 Editing Question
 
   .button-group
     = link_to 'Back', edit_staff_survey_path(@survey), class: "back-button btn btn-primary button-group-item"
-    = link_to 'Show', staff_survey_question_path(@survey, @survey_question), class: "btn btn-secondary button-group-item align-right"
 
 .primary-form-type.full-page-form.using-blocks= render 'form'

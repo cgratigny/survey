@@ -15,9 +15,10 @@
 
   .clear
     - if survey_item.show_if.present?
-      = render "show_ifs/show", show_if: survey_item.show_if
+      = render "staff/show_ifs/show", show_if: survey_item.show_if
 
-.survey-iten-block
-  .col-sm-12.col-md
-    = simple_form_for SurveyPageForm.new(survey_page: survey_item.survey_page, surveyed: AdmissionPacket.new), url: "#" do |f|
-      = render "hummingbird_survey/common/survey/answer_#{survey_item.survey_itemable_type.underscore}", f: f, survey_itemable: survey_item.survey_itemable
+- unless survey_item.survey_itemable_type.underscore == "survey_section"
+  .survey-iten-block
+    .col-sm-12.col-md
+      = simple_form_for SurveyPageForm.new(survey_page: survey_item.survey_page, surveyed: AdmissionPacket.new), url: "#" do |f|
+        = render "hummingbird_survey/common/survey/answer_#{survey_item.survey_itemable_type.underscore}", f: f, survey_itemable: survey_item.survey_itemable
