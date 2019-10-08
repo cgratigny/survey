@@ -6,9 +6,6 @@
   .block.as-section
     .form-inputs
       = f.input :item_number
-      = f.input :parent_id
-      = f.input :parent_type
-      = f.object.inspect
 
 
   = render "common/global_form_submit", cancel_path: edit_staff_survey_path(@survey), f: f

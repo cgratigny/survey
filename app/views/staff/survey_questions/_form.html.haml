@@ -10,6 +10,6 @@
       = f.input :question_type, as: :select, collection: SurveyQuestionType.select_options
 
       - if f.object.requires_answer_list?
-        = f.input :answer_list, input_html: { value: f.object.answer_list.join(",") }
+        = f.input :answer_list, input_html: { value: f.object.answer_list.to_a.join(",") }
 
   = render "common/global_form_submit", f: f
