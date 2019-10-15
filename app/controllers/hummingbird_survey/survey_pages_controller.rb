@@ -18,7 +18,7 @@ class HummingbirdSurvey::SurveyPagesController < HummingbirdSurvey::BaseControll
     respond_to do |format|
       @survey_page.id = SurveyPage.maximum(:id).to_i + 1 # because this doesn't happen automatically for some reason
       if @survey_page.save
-        format.html { redirect_to edit_survey_path(@survey), notice: 'Survey page was successfully created.' }
+        format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey page was successfully created.' }
         format.json { render :show, status: :created, location: @survey_page }
       else
         format.html { render :new }
@@ -33,7 +33,7 @@ class HummingbirdSurvey::SurveyPagesController < HummingbirdSurvey::BaseControll
   def update
     respond_to do |format|
       if @survey_page.update(survey_page_params)
-        format.html { redirect_to edit_survey_path(@survey), notice: 'Survey page was successfully updated.' }
+        format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey page was successfully updated.' }
         format.json { render :show, status: :ok, location: @survey_page }
       else
         format.html { render :edit }
@@ -45,7 +45,7 @@ class HummingbirdSurvey::SurveyPagesController < HummingbirdSurvey::BaseControll
   def destroy
     @survey_page.destroy
     respond_to do |format|
-      format.html { redirect_to edit_survey_path(@survey), notice: 'Survey page was successfully destroyed.' }
+      format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey page was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -54,21 +54,21 @@ class HummingbirdSurvey::SurveyPagesController < HummingbirdSurvey::BaseControll
     question = SurveyQuestion.create!
     item = SurveyItem.create!(survey_itemable: question, parent: @survey_page, item_number: @survey_page.survey_items.maximum(:item_number).to_i + 1)
 
-    redirect_to edit_survey_path(@survey), notice: 'Survey question was successfully added.'
+    redirect_to edit_staff_survey_path(@survey), notice: 'Survey question was successfully added.'
   end
 
   def add_note
     note = SurveyNote.create!
     item = SurveyItem.create!(survey_itemable: note, parent: @survey_page, item_number: @survey_page.survey_items.maximum(:item_number).to_i + 1)
 
-    redirect_to edit_survey_path(@survey), notice: 'Survey note was successfully added.'
+    redirect_to edit_staff_survey_path(@survey), notice: 'Survey note was successfully added.'
   end
 
   def add_section
     section = SurveySection.create!
     item = SurveyItem.create!(survey_itemable: section, parent: @survey_page, item_number: @survey_page.survey_items.maximum(:item_number).to_i + 1)
 
-    redirect_to edit_survey_path(@survey), notice: 'Survey section was successfully added.'
+    redirect_to edit_staff_survey_section_path(@survey, section), notice: 'Survey section was successfully added.'
   end
 
   private

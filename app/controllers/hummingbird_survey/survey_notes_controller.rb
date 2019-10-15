@@ -13,7 +13,7 @@ class HummingbirdSurvey::SurveyNotesController < HummingbirdSurvey::BaseControll
   def update
     respond_to do |format|
       if @survey_note.update(survey_note_params)
-        format.html { redirect_to edit_survey_path(@survey), notice: 'Survey note was successfully updated.' }
+        format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey note was successfully updated.' }
         format.json { render :show, status: :ok, location: @survey_note }
       else
         format.html { render :edit }
@@ -25,7 +25,7 @@ class HummingbirdSurvey::SurveyNotesController < HummingbirdSurvey::BaseControll
   def destroy
     @survey_note.destroy
     respond_to do |format|
-      format.html { redirect_to edit_survey_path(@survey), notice: 'Survey note was successfully destroyed.' }
+      format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey note was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

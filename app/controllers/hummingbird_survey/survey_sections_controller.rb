@@ -14,7 +14,7 @@ class HummingbirdSurvey::SurveySectionsController < HummingbirdSurvey::BaseContr
   def update
     respond_to do |format|
       if @survey_section.update(survey_section_params)
-        format.html { redirect_to edit_survey_path(@survey), notice: 'Survey section was successfully updated.' }
+        format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey section was successfully updated.' }
         format.json { render :show, status: :ok, location: @survey_section }
       else
         format.html { render :edit }
@@ -26,7 +26,7 @@ class HummingbirdSurvey::SurveySectionsController < HummingbirdSurvey::BaseContr
   def destroy
     @survey_section.destroy
     respond_to do |format|
-      format.html { redirect_to edit_survey_path(@survey), notice: 'Survey section was successfully destroyed.' }
+      format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey section was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -35,21 +35,21 @@ class HummingbirdSurvey::SurveySectionsController < HummingbirdSurvey::BaseContr
     question = SurveyQuestion.create!
     item = SurveyItem.create!(survey_itemable: question, parent: @survey_section, item_number: @survey_section.survey_items.maximum(:item_number).to_i + 1)
 
-    redirect_to edit_survey_path(@survey), notice: 'Survey question was successfully added.'
+    redirect_to edit_staff_survey_question_path(@survey, question), notice: 'Survey question was successfully added.'
   end
 
   def add_note
     note = SurveyNote.create!
     item = SurveyItem.create!(survey_itemable: note, parent: @survey_section, item_number: @survey_section.survey_items.maximum(:item_number).to_i + 1)
 
-    redirect_to edit_survey_path(@survey), notice: 'Survey note was successfully added.'
+    redirect_to edit_staff_survey_path(@survey), notice: 'Survey note was successfully added.'
   end
 
   def add_section
     section = SurveySection.create!
     item = SurveyItem.create!(survey_itemable: section, parent: @survey_section, item_number: @survey_section.survey_items.maximum(:item_number).to_i + 1)
 
-    redirect_to edit_survey_path(@survey), notice: 'Survey section was successfully added.'
+    redirect_to edit_staff_survey_path(@survey), notice: 'Survey section was successfully added.'
   end
 
   private
