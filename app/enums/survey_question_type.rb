@@ -33,6 +33,3 @@ end
 
 class SurveyQuestionType::RegionSelect < SurveyQuestionType
 end
-
-class SurveyQuestionType::Upload < SurveyQuestionType
-end
