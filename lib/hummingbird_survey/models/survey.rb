@@ -11,7 +11,9 @@ module HummingbirdSurvey
     end
 
     def surveyed_data_for(surveyed_obj)
-      if sub_obj.present?
+      if surveyed_obj.blank?
+        Hash.new
+      elsif sub_obj.present?
         surveyed_obj.data["survey_#{self.id}_#{sub_obj.class.name}_#{sub_obj.id}"] || {}
       else
         surveyed_obj.data["survey_#{self.id}"] || {}
