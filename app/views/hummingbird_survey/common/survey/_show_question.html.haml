@@ -2,4 +2,7 @@
   .question-text
     = item_options["label"]
   .response
-    = item_options["value"]
+    - if item_options["value"].include?("data:image")
+      = image_tag(item_options["value"])
+    - else
+      = item_options["value"]

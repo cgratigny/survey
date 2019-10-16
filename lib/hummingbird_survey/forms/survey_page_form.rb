@@ -148,6 +148,7 @@ module HummingbirdSurvey::SurveyPageForm
       hash["question_#{item.survey_itemable.id}"] = {
         "item_number" => item.item_number,
         "label" => item.survey_itemable.label,
+        "question_type" => item.survey_itemable.question_type,
         "value" => all_answer_data["question_#{item.survey_itemable.id}"]
       }
     when "SurveySection"

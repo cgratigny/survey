@@ -4,6 +4,9 @@ class SurveyQuestionType < ClassyEnum::Base
   end
 end
 
+class SurveyQuestionType::Signature < SurveyQuestionType
+end
+
 class SurveyQuestionType::TextField < SurveyQuestionType
 end
 
