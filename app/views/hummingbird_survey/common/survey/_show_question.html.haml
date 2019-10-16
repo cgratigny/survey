@@ -2,7 +2,7 @@
   .question-text
     = item_options["label"]
   .response
-    - if item_options["value"].include?("data:image")
+    - if SurveyQuestionType[item_options["question_type"]].signature?
       = image_tag(item_options["value"])
     - else
       = item_options["value"]
