@@ -1,0 +1,15 @@
+.survey-condition-block
+  .survey-contition-title
+    %h4 Condition
+  .survey-contition-content
+    %p
+      = link_to edit_staff_survey_show_if_path(@survey, show_if) do
+        %span.fal.fa-edit
+      %b Survey question:
+      = show_if.survey_question.label if show_if.survey_question.present?
+    %p
+      %b Condition:
+      = show_if.condition
+    %p
+      %b Target value:
+      = show_if.target_value

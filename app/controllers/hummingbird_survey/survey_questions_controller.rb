@@ -13,7 +13,7 @@ class HummingbirdSurvey::SurveyQuestionsController < HummingbirdSurvey::BaseCont
   def update
     respond_to do |format|
       if @survey_question.update(survey_question_params)
-        format.html { redirect_to edit_survey_path(@survey), notice: 'Survey question was successfully updated.' }
+        format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey question was successfully updated.' }
         format.json { render :show, status: :ok, location: @survey_question }
       else
         format.html { render :edit }
@@ -25,7 +25,7 @@ class HummingbirdSurvey::SurveyQuestionsController < HummingbirdSurvey::BaseCont
   def destroy
     @survey_question.destroy
     respond_to do |format|
-      format.html { redirect_to edit_survey_path(@survey), notice: 'Survey question was successfully destroyed.' }
+      format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey question was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

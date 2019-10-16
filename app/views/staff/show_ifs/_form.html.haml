@@ -1,0 +1,12 @@
+-# frozen_string_literal: true
+= simple_form_for @show_if, url: staff_survey_show_if_path(@survey, @show_if) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .block.as-section
+    .form-inputs
+      = f.input :survey_question_id, as: :select, collection: @survey.survey_questions, value_method: :id, label_method: :label
+      = f.input :condition, as: :select, collection: ShowIfCondition.select_options
+      = f.input :target_value
+
+  = render "common/global_form_submit", f: f
