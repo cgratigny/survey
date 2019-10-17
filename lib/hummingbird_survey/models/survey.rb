@@ -20,11 +20,15 @@ module HummingbirdSurvey
       end
     end
 
-    def set_surveyed_data_for!(surveyed_obj, target_data)
+    def set_surveyed_data_for!(surveyed_obj, target_data, request = nil)
       if sub_obj.present?
         surveyed_obj.data["survey_#{self.id}_#{sub_obj.class.name}_#{sub_obj.id}"] = target_data
       else
         surveyed_obj.data["survey_#{self.id}"] = target_data
+      end
+
+      if request.present? && request.is_a?(ActionDispatch::Request)
+        surveyed_obj.data["survey_#{self.id}_request"] = { ip_address: request.remote_ip, browser: request.user_agent, path: request.path }
       end
 
       surveyed_obj.save(validate: false)
