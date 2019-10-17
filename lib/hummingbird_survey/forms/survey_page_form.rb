@@ -1,7 +1,7 @@
 module HummingbirdSurvey::SurveyPageForm
   include ActiveModel::Model
 
-  attr_accessor :survey_page, :surveyed, :sub_obj
+  attr_accessor :survey_page, :surveyed, :sub_obj, :request
 
   validate :required_questions_presence
 
@@ -72,7 +72,7 @@ module HummingbirdSurvey::SurveyPageForm
     if !should_validate || valid?
       target_page_data = build_final_page_data
       raw_data["page_#{survey_page.id}"] = target_page_data
-      survey.set_surveyed_data_for!(surveyed, raw_data)
+      survey.set_surveyed_data_for!(surveyed, raw_data, request)
       surveyed.reload
       true
     else
