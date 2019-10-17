@@ -13,7 +13,7 @@ class HummingbirdSurvey::SurveyItemsController < HummingbirdSurvey::BaseControll
   def update
     respond_to do |format|
       if @survey_item.update(survey_item_params)
-        format.html { redirect_to edit_survey_path(@survey), notice: 'Survey item was successfully updated.' }
+        format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey item was successfully updated.' }
         format.json { render :show, status: :ok, location: @survey_item }
       else
         format.html { render :edit }
@@ -25,7 +25,7 @@ class HummingbirdSurvey::SurveyItemsController < HummingbirdSurvey::BaseControll
   def destroy
     @survey_item.destroy
     respond_to do |format|
-      format.html { redirect_to edit_survey_path(@survey), notice: 'Survey item was successfully destroyed.' }
+      format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -33,7 +33,7 @@ class HummingbirdSurvey::SurveyItemsController < HummingbirdSurvey::BaseControll
   def add_show_if
     show_if = ShowIf.create!(showable: @survey_item)
 
-    redirect_to edit_survey_path(@survey), notice: 'Show If was successfully added.'
+    redirect_to edit_staff_survey_path(@survey), notice: 'Show If was successfully added.'
   end
 
   private
