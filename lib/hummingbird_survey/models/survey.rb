@@ -10,13 +10,19 @@ module HummingbirdSurvey
       has_many :survey_pages, dependent: :destroy
     end
 
+    def survey_data_key
+      if sub_obj.present?
+        "survey_#{self.id}_#{sub_obj.class.name}_#{sub_obj.id}"
+      else
+        "survey_#{self.id}"
+      end
+    end
+
     def surveyed_data_for(surveyed_obj)
       if surveyed_obj.blank?
         Hash.new
-      elsif sub_obj.present?
-        surveyed_obj.data["survey_#{self.id}_#{sub_obj.class.name}_#{sub_obj.id}"] || {}
       else
-        surveyed_obj.data["survey_#{self.id}"] || {}
+        surveyed_obj.data[survey_data_key] || {}
       end
     end
 
@@ -36,11 +42,7 @@ module HummingbirdSurvey
     end
 
     def set_surveyed_data_for!(surveyed_obj, target_data, request = nil)
-      if sub_obj.present?
-        surveyed_obj.data["survey_#{self.id}_#{sub_obj.class.name}_#{sub_obj.id}"] = target_data
-      else
-        surveyed_obj.data["survey_#{self.id}"] = target_data
-      end
+      surveyed_obj.data[survey_data_key] = target_data
 
       if request.present? && request.is_a?(ActionDispatch::Request)
         surveyed_obj.data["survey_#{self.id}_request"] = { completed_at: Time.zone.now, ip_address: request.remote_ip, browser: request.user_agent, path: request.path }
