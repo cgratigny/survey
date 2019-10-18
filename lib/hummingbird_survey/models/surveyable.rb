@@ -8,7 +8,13 @@ module HummingbirdSurvey
     end
 
     def initialize_survey
-      self.create_survey!(surveyable: self) unless survey.present?
+      return if survey.present?
+      
+      survey = self.create_survey!(surveyable: self)
+      page = survey.add_page!(title: "Page 1", number: 1)
+
+      survey_section = SurveySection.create!(title: "Section 1")
+      item = SurveyItem.create!(survey_itemable: survey_section, parent: page, item_number: 1)
     end
 
   end
