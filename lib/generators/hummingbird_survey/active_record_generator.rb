@@ -3,6 +3,7 @@ class CreateSurveyTables < ActiveRecord::Migration<%= migration_version %>
     create_table :surveys do |t|
       t.references :surveyable, polymorphic: true
       t.string :display_name
+      t.jsonb :data, default: {}
 
       t.timestamps
     end
