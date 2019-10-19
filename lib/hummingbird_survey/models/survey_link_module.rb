@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  module SurveyLink
+  module SurveyLinkModule
     extend ActiveSupport::Concern
 
     included do

@@ -1,5 +1,5 @@
 module HummingbirdSurvey
-  module Question
+  module QuestionModule
     extend ActiveSupport::Concern
 
     included do
