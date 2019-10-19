@@ -20,7 +20,7 @@ module HummingbirdSurvey
     end
 
     def survey_link_for(surveyed_obj)
-      # return nil unless surveyed_obj.present?
+      return nil unless surveyed_obj.present?
       survey_link = SurveyLink.find_or_create_by(survey: self, surveyed: surveyed_obj)
     end
 
