@@ -5,6 +5,7 @@ module HummingbirdSurvey
     included do
       belongs_to :showable, polymorphic: true
       belongs_to :answer
+      classy_enum_attr :condition, enum: "ShowIfCondition", allow_blank: true
     end
 
     def parent
@@ -33,13 +34,6 @@ module HummingbirdSurvey
     end
 
     ### Code for the new ShowIfs used in the new Survey code ###
-
-    include Duplicator
-
-    belongs_to :showable, polymorphic: true
-
-    classy_enum_attr :condition, enum: "ShowIfCondition", allow_blank: true
-
     def survey_question
       SurveyQuestion.find_by(id: survey_question_id)
     end
