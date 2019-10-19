@@ -1,6 +1,6 @@
 -# frozen_string_literal: true
 
-- if @survey.surveyable.linked_field_names.any?
+- if @survey.surveyable.try(:linked_field_names) && @survey.surveyable.linked_field_names.any?
   %h3 Linked Fields
 
   %ul
