@@ -9,12 +9,34 @@ module HummingbirdSurvey
 
     def initialize_survey
       return if survey.present?
-      
+
       survey = self.create_survey!(surveyable: self)
       page = survey.add_page!(title: "Page 1", number: 1)
 
       survey_section = SurveySection.create!(title: "Section 1")
       item = SurveyItem.create!(survey_itemable: survey_section, parent: page, item_number: 1)
+    end
+
+    # used to link fields from the survey target with answers in the survey
+    def linked_field_names
+      {}
+    end
+
+    def update_linked_fields_for(surveyed_obj)
+      return unless surveyed_obj.present?
+
+      linked_field_names.each do |field_name, field_options|
+        questions = self.survey.questions_linked_to(field_name)
+        question_id = questions.first.present? ? questions.first.id : nil
+        next if question_id.blank?
+
+        answer_value = self.survey.answer_for_question(surveyed_obj, question_id)
+
+        if answer_value.present?
+          surveyed_obj.send("#{field_name.to_s}=", answer_value)
+          surveyed_obj.save(validate: false)
+        end
+      end
     end
 
   end

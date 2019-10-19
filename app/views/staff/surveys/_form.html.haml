@@ -1,4 +1,16 @@
 -# frozen_string_literal: true
+
+- if @survey.surveyable.linked_field_names.any?
+  %h3 Linked Fields
+
+  %ul
+    - @survey.surveyable.linked_field_names.each do |field_name, field_options|
+      %li
+        = field_options["label"]
+        %ul
+          - @survey.questions_linked_to(field_name).each do |question|
+            %li= question.full_path
+
 = simple_form_for [:staff, @survey] do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
