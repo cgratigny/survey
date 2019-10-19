@@ -3,12 +3,27 @@ module HummingbirdSurvey
     extend ActiveSupport::Concern
 
     included do
+      COLUMNS = {
+        save_pdf: {
+          hint: "Save results as pdf. Pdf will be encrypted by default",
+          type: "checkbox"
+        }
+      }
+
+      store_accessor :configuration, *COLUMNS.keys
+
       belongs_to :surveyable, polymorphic: true
       has_many :survey_links
 
       attr_accessor :sub_obj # temporary object used to further granularize surveys - one survey can be used for multiple objects. Set this before you use the other methods
 
       has_many :survey_pages, dependent: :destroy
+    end
+
+    module ClassMethods
+      def field_names
+        COLUMNS.keys
+      end
     end
 
     def survey_link_for(surveyed_obj)
