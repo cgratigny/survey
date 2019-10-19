@@ -4,6 +4,7 @@ module HummingbirdSurvey
 
     included do
       belongs_to :surveyable, polymorphic: true
+      has_many :survey_links
 
       attr_accessor :sub_obj # temporary object used to further granularize surveys - one survey can be used for multiple objects. Set this before you use the other methods
 
@@ -18,37 +19,40 @@ module HummingbirdSurvey
       end
     end
 
+    def survey_link_for(surveyed_obj)
+      return nil unless surveyed_obj.present?
+      survey_link = SurveyLink.find_or_create_by(survey: self, surveyed: surveyed_obj)
+    end
+
     def surveyed_data_for(surveyed_obj)
       if surveyed_obj.blank?
         Hash.new
       else
-        surveyed_obj.data[survey_data_key] || {}
+        survey_link = survey_link_for(surveyed_obj)
+        survey_link.present? ? survey_link.answers_data : {}
       end
-    end
-
-    def all_data_for(surveyed_obj)
-      {
-        surveyed_data: surveyed_data_for(surveyed_obj),
-        request_data: request_data_for(surveyed_obj)
-      }
     end
 
     def request_data_for(surveyed_obj)
       if surveyed_obj.blank?
         Hash.new
       else
-        surveyed_obj.data["#{survey_data_key}_request"] || {}
+        survey_link = survey_link_for(surveyed_obj)
+        survey_link.present? ? survey_link.request_data : {}
       end
     end
 
     def set_surveyed_data_for!(surveyed_obj, target_data, request = nil)
-      surveyed_obj.data[survey_data_key] = target_data
+      survey_link = survey_link_for(surveyed_obj)
+      return false unless survey_link.present?
+
+      survey_link.answers_data = target_data
 
       if request.present? && request.is_a?(ActionDispatch::Request)
-        surveyed_obj.data["#{survey_data_key}_request"] = { completed_at: Time.zone.now, ip_address: request.remote_ip, browser: request.user_agent, path: request.path }
+        survey_link.request_data = { completed_at: Time.zone.now, ip_address: request.remote_ip, browser: request.user_agent, path: request.path }
       end
 
-      surveyed_obj.save(validate: false)
+      survey_link.save(validate: false)
     end
 
     def current_page_for(surveyed_obj)
