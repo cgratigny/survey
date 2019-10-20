@@ -6,7 +6,7 @@ module HummingbirdSurvey
       COLUMNS = {
         save_pdf: {
           hint: "Save results as pdf. Pdf will be encrypted by default",
-          type: "checkbox"
+          type: "boolean"
         }
       }
 
@@ -18,6 +18,7 @@ module HummingbirdSurvey
       attr_accessor :sub_obj # temporary object used to further granularize surveys - one survey can be used for multiple objects. Set this before you use the other methods
 
       has_many :survey_pages, dependent: :destroy
+
     end
 
     module ClassMethods
@@ -169,14 +170,21 @@ module HummingbirdSurvey
       set_surveyed_data_for!(surveyed_obj, surveyed_data)
     end
 
-    def complete_page_for!(given_page, surveyed_obj)
+    def complete_page_for!(given_page, surveyed_obj, request = nil)
       surveyed_data = surveyed_data_for(surveyed_obj)
       page_key = "page_#{given_page.id}"
 
       surveyed_data[page_key] = {} if surveyed_data[page_key].blank?
       surveyed_data[page_key]["started_at"] = Time.zone.now if surveyed_data[page_key]["started_at"].blank?
       surveyed_data[page_key]["completed_at"] = Time.zone.now
-      set_surveyed_data_for!(surveyed_obj, surveyed_data)
+      set_surveyed_data_for!(surveyed_obj, surveyed_data, request)
+      complete_survey!(surveyed_obj) if given_page.last_page?
+    end
+
+    def complete_survey!(surveyed_obj)
+      if self.save_pdf
+        survey_link_for(surveyed_obj).generate_pdf
+      end
     end
 
     # used to build the list of connected questions

@@ -10,6 +10,7 @@ require 'hummingbird_survey/models/survey_module.rb'
 require 'hummingbird_survey/models/question_module.rb'
 require 'hummingbird_survey/models/surveyable.rb'
 require 'hummingbird_survey/models/survey_page_form.rb'
+require 'hummingbird_survey/services/survey_pdf_creator_service.rb'
 require 'hummingbird_survey/config.rb'
 require 'hummingbird_survey/railtie.rb'
 

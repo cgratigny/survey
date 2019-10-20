@@ -18,6 +18,10 @@
   .block.as-section
     .form-inputs
       = f.input :display_name
+      = f.simple_fields_for :configuration do |configuration_f|
+        - Survey.field_names.each do |field_name|
+          = configuration_f.input field_name.to_sym, as: (Survey::COLUMNS[field_name.to_sym][:type].nil? ? :string : Survey::COLUMNS[field_name.to_sym][:type]) , hint: Survey::COLUMNS[field_name.to_sym][:help], input_html: { checked: (f.object.send(field_name.to_sym) == true), value: f.object.send(field_name.to_sym), autocomplete: :off }
+
 
   .embedded-submit
     = render "common/global_form_submit", f: f, cancel_path: DynamicPath.new.surveyable_path(@survey)

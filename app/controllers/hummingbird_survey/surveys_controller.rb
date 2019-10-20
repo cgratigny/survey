@@ -70,6 +70,6 @@ class HummingbirdSurvey::SurveysController < HummingbirdSurvey::BaseController
   end
 
   def survey_params
-    params[:survey].present? ? params.require(:survey).permit(:surveyable_id, :surveyable_type, :display_name) : {}
+    params[:survey].present? ? params.require(:survey).permit(:surveyable_id, :surveyable_type, :display_name, custom_settings: Survey.field_names) : {}
   end
 end

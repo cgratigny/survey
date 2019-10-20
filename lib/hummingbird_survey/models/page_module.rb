@@ -8,6 +8,11 @@ module HummingbirdSurvey
       has_many :survey_items, as: :parent, dependent: :destroy
 
       scope :in_order, -> { order("survey_pages.page_number ASC") }
+      scope :last_page, -> { order("survey_pages.page_number DESC").first }
+    end
+
+    def last_page?
+      self == self.class.last_page
     end
 
     # to end the recursion for survey_items and children
