@@ -8,7 +8,7 @@ class CreateSurveyTables < ActiveRecord::Migration<%= migration_version %>
       t.timestamps
     end
 
-    create_table :survey_links do |t|
+    create_table :survey_responses do |t|
       t.references :survey
       t.references :surveyed, polymorphic: true
       t.jsonb :answers_data, default: {}

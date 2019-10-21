@@ -1,6 +1,6 @@
 require 'rails'
 
-require 'hummingbird_survey/models/survey_link_module.rb'
+require 'hummingbird_survey/models/survey_response_module.rb'
 require 'hummingbird_survey/models/item_module.rb'
 require 'hummingbird_survey/models/note_module.rb'
 require 'hummingbird_survey/models/show_if_module.rb'
