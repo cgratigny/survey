@@ -74,6 +74,11 @@ module HummingbirdSurvey
         target_page_data = build_final_page_data
         raw_data["page_#{survey_page.id}"] = target_page_data
         survey.set_surveyed_data_for!(surveyed, raw_data, request)
+
+        if survey.surveyable.linked_field_names.any?
+          survey.surveyable.update_linked_fields_for(surveyed)
+        end
+
         surveyed.reload
         true
       else

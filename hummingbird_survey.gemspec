@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.date = "2019-09-22"
   s.email = "chris@progettalearn.com".freeze
   s.files = ["lib/hummingbird_survey.rb".freeze]
-  s.rubygems_version = "3.0.6".freeze
+  s.rubygems_version = "3.0.3".freeze
   s.summary = "Gem for shared code for hummingbird and dragonfly surveys".freeze
 
-  s.installed_by_version = "3.0.6" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.0.3" if s.respond_to? :installed_by_version
 end

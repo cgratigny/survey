@@ -83,12 +83,10 @@ module HummingbirdSurvey
       ids.uniq
     end
 
-    def surveyed_data_for(surveyed_obj, sub_obj = nil)
-      if sub_obj.present?
-        surveyed_obj.data["survey_#{survey.id}_#{sub_obj.class.name}_#{sub_obj.id}"].present? && surveyed_obj.data["survey_#{survey.id}_#{sub_obj.class.name}_#{sub_obj.id}"]["page_#{self.id}"].present? ? surveyed_obj.data["survey_#{survey.id}_#{sub_obj.class.name}_#{sub_obj.id}"]["page_#{self.id}"] : {}
-      else
-        surveyed_obj.data["survey_#{survey.id}"].present? && surveyed_obj.data["survey_#{survey.id}"]["page_#{self.id}"].present? ? surveyed_obj.data["survey_#{survey.id}"]["page_#{self.id}"] : {}
-      end
+    def surveyed_data_for(surveyed_obj)
+      survey_data = self.survey.surveyed_data_for(surveyed_obj) || {}
+
+      survey_data["page_#{self.id}"] || {}
     end
 
     def duplicate!

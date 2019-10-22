@@ -52,6 +52,6 @@ class HummingbirdSurvey::SurveyQuestionsController < HummingbirdSurvey::BaseCont
       params[:survey_question][:answer_list] = result
     end
 
-    params[:survey_question].present? ? params.require(:survey_question).permit(:label, :required, :question_type, answer_list: []) : {}
+    params[:survey_question].present? ? params.require(:survey_question).permit(:label, :required, :question_type, :linked_field_name, answer_list: []) : {}
   end
 end

@@ -4,55 +4,110 @@ module HummingbirdSurvey
 
     included do
       belongs_to :surveyable, polymorphic: true
-      has_many :survey_links
+      has_many :survey_responses
 
       attr_accessor :sub_obj # temporary object used to further granularize surveys - one survey can be used for multiple objects. Set this before you use the other methods
 
       has_many :survey_pages, dependent: :destroy
     end
 
-    def survey_data_key
-      if sub_obj.present?
-        "survey_#{self.id}_#{sub_obj.class.name}_#{sub_obj.id}"
-      else
-        "survey_#{self.id}"
-      end
-    end
-
-    def survey_link_for(surveyed_obj)
+    def survey_response_for(surveyed_obj)
       return nil unless surveyed_obj.present?
-      survey_link = SurveyLink.find_or_create_by(survey: self, surveyed: surveyed_obj)
+      survey_response = SurveyResponse.find_or_create_by(survey: self, surveyed: surveyed_obj)
     end
 
     def surveyed_data_for(surveyed_obj)
       if surveyed_obj.blank?
         Hash.new
       else
-        survey_link = survey_link_for(surveyed_obj)
-        survey_link.present? ? survey_link.answers_data : {}
+        survey_response = survey_response_for(surveyed_obj)
+        if survey_response.present?
+          if sub_obj.present?
+            survey_response.answers_data["#{sub_obj.class.name}_#{sub_obj.id}"] || {}
+          else
+            survey_response.answers_data
+          end
+        else
+          {}
+        end
       end
+    end
+
+    def answer_for_question(surveyed_obj, question_id)
+      surveyed_data = surveyed_data_for(surveyed_obj)
+      answer = ""
+
+      surveyed_data.each do |page_key, page_data|
+        answer = answer_for_question_in_container(page_data["items"], question_id)
+        break if answer.present?
+      end
+
+      answer
+    end
+
+    def answer_for_question_in_container(container_data, question_id)
+      container_data.each do |item_key, item_data|
+        if item_key.start_with?("question")
+          if item_key.end_with?(question_id.to_s)
+            return item_data["value"]
+          end
+        elsif item_key.start_with?("section")
+          return answer_for_question_in_container(item_data["items"], question_id)
+        end
+      end
+
+      ""
+    end
+
+    def questions_linked_to(field_name)
+      linked_questions = []
+      return linked_questions if field_name.blank?
+
+      survey_pages.each do |page|
+        linked_questions += questions_in_container_linked_to(page, field_name)
+      end
+
+      linked_questions.flatten
+    end
+
+    def questions_in_container_linked_to(container, field_name)
+      linked_questions = []
+      return linked_questions if field_name.blank?
+
+      container.survey_items.each do |item|
+        actual_item = item.survey_itemable
+        if actual_item.is_a?(SurveyQuestion)
+          if actual_item.linked_field_name.to_s == field_name.to_s
+            linked_questions << actual_item
+          end
+        elsif actual_item.is_a?(SurveySection)
+          linked_questions += questions_in_container_linked_to(actual_item, field_name)
+        end
+      end
+
+      linked_questions.flatten
     end
 
     def request_data_for(surveyed_obj)
       if surveyed_obj.blank?
         Hash.new
       else
-        survey_link = survey_link_for(surveyed_obj)
-        survey_link.present? ? survey_link.request_data : {}
+        survey_response = survey_response_for(surveyed_obj)
+        survey_response.present? ? survey_response.request_data : {}
       end
     end
 
     def set_surveyed_data_for!(surveyed_obj, target_data, request = nil)
-      survey_link = survey_link_for(surveyed_obj)
-      return false unless survey_link.present?
+      survey_response = survey_response_for(surveyed_obj)
+      return false unless survey_response.present?
 
-      survey_link.answers_data = target_data
+      survey_response.answers_data = target_data
 
       if request.present? && request.is_a?(ActionDispatch::Request)
-        survey_link.request_data = { completed_at: Time.zone.now, ip_address: request.remote_ip, browser: request.user_agent, path: request.path }
+        survey_response.request_data = { completed_at: Time.zone.now, ip_address: request.remote_ip, browser: request.user_agent, path: request.path }
       end
 
-      survey_link.save(validate: false)
+      survey_response.save(validate: false)
     end
 
     def current_page_for(surveyed_obj)

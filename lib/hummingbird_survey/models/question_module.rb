@@ -10,7 +10,7 @@ module HummingbirdSurvey
 
       classy_enum_attr :question_type, enum: "SurveyQuestionType", allow_blank: true
 
-      store_accessor :data, :answer_list
+      store_accessor :data, [:answer_list, :linked_field_name]
     end
 
     def survey_page
@@ -36,5 +36,20 @@ module HummingbirdSurvey
       required? && survey_item.full_display?(flat_answer_data)
     end
 
+    def full_path
+      full_path = full_path_from_item(self.survey_item, self.label)
+    end
+
+    def full_path_from_item(survey_item, path_so_far)
+      parent = survey_item.parent
+
+      if parent.is_a?(SurveyPage)
+        "Page #{parent.page_number}: #{parent.title} -> #{path_so_far}"
+      elsif parent.is_a?(SurveySection)
+        full_path_from_item(parent.survey_item, "#{parent.title} -> #{path_so_far}")
+      else
+        path_so_far
+      end
+    end
   end
 end

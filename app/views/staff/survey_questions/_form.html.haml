@@ -12,4 +12,7 @@
       - if f.object.requires_answer_list?
         = f.input :answer_list, input_html: { value: f.object.answer_list.to_a.join(",") }
 
+      - if f.object.survey.surveyable.linked_field_names.any?
+        = f.input :linked_field_name, as: :select, collection: f.object.survey.surveyable.linked_field_names.map{ |field_name, field_options| [field_options[:label], field_name] }, include_blank: "None"
+
   = render "common/global_form_submit", f: f
