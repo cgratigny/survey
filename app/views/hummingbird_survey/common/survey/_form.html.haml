@@ -5,3 +5,4 @@
 
 .button-group.actions
   = f.submit "#{@survey_page.last_page? ? "COMPLETE" : "NEXT"}", :class => "btn btn-primary button-group-item align-right sm-half"
+  = link_to "Cancel", cancel_path, class: "btn btn-lg btn-secondary no-border cancel btn-sm-full-width" if defined?(cancel_path)
