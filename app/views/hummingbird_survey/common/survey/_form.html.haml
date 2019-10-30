@@ -4,6 +4,6 @@
   = render "hummingbird_survey/common/survey/answer_item", f: f, survey_item: survey_item
 
 .button-group.actions
-  = f.submit "SAVE & EXIT", name: 'save_and_exit', :class => "btn btn-secondary button-group-item align-right sm-half", id: "save-and-exit", data: { disable_with: 'Saving ...' } unless params[:review_step].present?
-  = f.submit "#{@survey_page.last_page? ? "COMPLETE" : "NEXT"}", :class => "btn btn-primary button-group-item align-right sm-half", data: { disable_with: 'Saving ...' }
+  = f.submit "SAVE & EXIT", name: 'save_and_exit', :class => "btn btn-secondary button-group-item align-right sm-half save-exit", id: "save-and-exit", data: { disable_with: 'Saving ...' } unless params[:review_step].present?
+  = f.submit "#{@survey_page.last_page? ? "COMPLETE" : "NEXT"}", :class => "btn btn-primary button-group-item  align-right sm-half complete-next", data: { disable_with: 'Saving ...' }
   = link_to "Cancel", cancel_path, class: "btn btn-lg btn-secondary no-border cancel btn-sm-full-width" if defined?(cancel_path)
