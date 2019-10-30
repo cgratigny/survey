@@ -7,6 +7,8 @@ module HummingbirdSurvey
 
       has_many :survey_items, as: :parent, dependent: :destroy
 
+      after_commit :update_page_numbers
+
       scope :in_order, -> { order("survey_pages.page_number ASC") }
     end
 
@@ -99,6 +101,12 @@ module HummingbirdSurvey
       end
 
       target_page
+    end
+
+    def update_page_numbers
+      survey.survey_pages.in_order.each.with_index(1) do |page, index|
+        page.update_column(:page_number, index)
+      end
     end
   end
 end

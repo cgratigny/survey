@@ -53,11 +53,16 @@ module HummingbirdSurvey
       @all_answer_data ||= build_answer_data || {}
     end
 
+    def save_and_exit?
+      @save_and_exit.present?
+    end
+
     def parse_attributes(params)
       target_params = params["survey_page_form"].permit!
       questions.each do |question|
         send("#{question.qkey}=", target_params[question.qkey])
       end
+      @save_and_exit = params["save_and_exit"]
     end
 
     def attributes=(params)
@@ -70,7 +75,7 @@ module HummingbirdSurvey
     end
 
     def save(should_validate = true)
-      if !should_validate || valid?
+      if save_and_exit? || !should_validate || valid?
         target_page_data = build_final_page_data
         raw_data["page_#{survey_page.id}"] = target_page_data
         survey.set_surveyed_data_for!(surveyed, raw_data, request)
