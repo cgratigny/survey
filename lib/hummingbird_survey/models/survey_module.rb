@@ -11,6 +11,10 @@ module HummingbirdSurvey
       has_many :survey_pages, dependent: :destroy
     end
 
+    def total_page_count
+      self.survey_pages.count + pages_before + pages_after
+    end
+
     def survey_response_for(surveyed_obj)
       return nil unless surveyed_obj.present?
       survey_response = SurveyResponse.find_or_create_by(survey: self, surveyed: surveyed_obj)
