@@ -19,6 +19,9 @@
     .form-inputs
       = f.input :display_name
 
+      = f.input :pages_before
+      = f.input :pages_after
+
   .embedded-submit
     = render "common/global_form_submit", f: f, cancel_path: DynamicPath.new.surveyable_path(@survey)
 

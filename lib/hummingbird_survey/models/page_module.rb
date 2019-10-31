@@ -43,6 +43,10 @@ module HummingbirdSurvey
       next_page.blank?
     end
 
+    def display_page_number
+      page_number.to_i + survey.pages_before
+    end
+
     def display_title_with_number
       "Page #{page_number}#{" - #{title}" if title.present?}"
     end
