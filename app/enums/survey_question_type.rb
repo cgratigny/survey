@@ -34,6 +34,12 @@ class SurveyQuestionType::Select < SurveyQuestionType
   end
 end
 
+class SurveyQuestionType::MultiSelect < SurveyQuestionType
+  def requires_answer_list?
+    true
+  end
+end
+
 class SurveyQuestionType::CountrySelect < SurveyQuestionType
 end
 

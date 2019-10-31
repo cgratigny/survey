@@ -3,6 +3,8 @@
     = f.input "question_#{survey_itemable.id}", as: :text, label: survey_itemable.label, required: survey_itemable.required?
   - when SurveyQuestionType::RadioButtons.new
     = f.input "question_#{survey_itemable.id}", as: :radio_buttons, label: survey_itemable.label, item_wrapper_class: "inline", collection: survey_itemable.answer_list, required: survey_itemable.required?
+  - when SurveyQuestionType::MultiSelect.new
+    = f.input "question_#{survey_itemable.id}", as: :multi_select, label: survey_itemable.label, item_wrapper_class: "inline", collection: survey_itemable.answer_list, required: survey_itemable.required?
   - when SurveyQuestionType::Checkbox.new
     = f.input "question_#{survey_itemable.id}", as: :boolean, label: false, item_wrapper_class: "inline", label_method: :to_s, value_method: :to_s, inline_label: survey_itemable.label, required: true
   - when SurveyQuestionType::Select.new
