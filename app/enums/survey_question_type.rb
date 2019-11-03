@@ -11,9 +11,15 @@ class SurveyQuestionType::Signature < SurveyQuestionType
 end
 
 class SurveyQuestionType::TextField < SurveyQuestionType
+  def text
+    "Short Answer"
+  end
 end
 
 class SurveyQuestionType::TextArea < SurveyQuestionType
+  def text
+    "Paragraph Answer"
+  end
 end
 
 class SurveyQuestionType::RadioButtons < SurveyQuestionType

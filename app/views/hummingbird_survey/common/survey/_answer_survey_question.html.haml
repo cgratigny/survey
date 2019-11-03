@@ -13,5 +13,7 @@
     = render "common/address/country_select", form: f, field_name: "question_#{survey_itemable.id}", label: survey_itemable.label, required: survey_itemable.required?, country_select_id: "question_#{survey_itemable.id}_country"
   - when SurveyQuestionType::RegionSelect.new
     = render "common/address/region_select", form: f, field_name: "question_#{survey_itemable.id}", label: survey_itemable.label, required: survey_itemable.required?, country_select_id: "question_#{survey_itemable.country_question_id}_country", country_code: f.object.all_answer_data["question_#{survey_itemable.country_question_id}"]
+  - when SurveyQuestionType::Encrypted.new
+    = f.input "question_#{survey_itemable.id}", as: :encrypted, label: survey_itemable.label, required: survey_itemable.required?
   - else
     = f.input "question_#{survey_itemable.id}", label: survey_itemable.label, required: survey_itemable.required?
