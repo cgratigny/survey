@@ -4,6 +4,11 @@
   .response{ id: "response-#{item_options["item_number"]}"}
     - if SurveyQuestionType[item_options["question_type"]].signature?
       = image_tag(item_options["value"])
+    - elsif SurveyQuestionType[item_options["question_type"]].multi_select?
+      - if item_options["value"].is_a?(Array)
+        = item_options["value"].reject{ |r| r.empty? }.to_sentence(last_word_connector: ", ")
+      - else
+        = item_options["value"]
     - elsif SurveyQuestionType[item_options["question_type"]].encrypted?
       - decrypted_value = EncryptionService.decrypt(item_options["value"])
       %span.hide.toggle-answer.decrypted-answer{ id: "decrypted-answer-#{item_options["item_number"]}", data: { target: "masked-answer-#{item_options["item_number"]}" } }
