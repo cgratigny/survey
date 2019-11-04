@@ -2,23 +2,38 @@ class SurveyQuestionType < ClassyEnum::Base
   def requires_answer_list?
     false
   end
+
+  def response_partial
+    :default
+  end
 end
 
 class SurveyQuestionType::Encrypted < SurveyQuestionType
+  def response_partial
+    :encrypted
+  end
 end
 
 class SurveyQuestionType::Signature < SurveyQuestionType
+  def response_partial
+    :signature
+  end
 end
 
 class SurveyQuestionType::TextField < SurveyQuestionType
   def text
     "Short Answer"
   end
+
 end
 
 class SurveyQuestionType::TextArea < SurveyQuestionType
   def text
     "Paragraph Answer"
+  end
+
+  def response_partial
+    :text_area
   end
 end
 
@@ -32,6 +47,10 @@ class SurveyQuestionType::Checkbox < SurveyQuestionType
   def requires_answer_list?
     true
   end
+
+  def response_partial
+    :checkbox
+  end
 end
 
 class SurveyQuestionType::Select < SurveyQuestionType
@@ -43,6 +62,10 @@ end
 class SurveyQuestionType::MultiSelect < SurveyQuestionType
   def requires_answer_list?
     true
+  end
+
+  def response_partial
+    :multi_select
   end
 end
 
