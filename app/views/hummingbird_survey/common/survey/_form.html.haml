@@ -1,4 +1,4 @@
-%h2.block-heading.survey-page-title #{f.object.survey_page.page_number}/#{f.object.survey_page.survey.survey_pages.count} : #{f.object.survey_page.title}
+%h2.block-heading.survey-page-title Page #{f.object.survey_page.page_number} of #{f.object.survey_page.survey.survey_pages.count} : #{f.object.survey_page.title}
 
 - f.object.survey_page.survey_items.in_order.each do |survey_item|
   = render "hummingbird_survey/common/survey/answer_item", f: f, survey_item: survey_item
