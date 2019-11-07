@@ -8,7 +8,7 @@ class SurveyQuestionType < ClassyEnum::Base
   end
 
   def all_fields
-    [:agree_text]
+    SurveyQuestionType.all.map{|type| type.fields}.flatten.uniq
   end
 end
 
