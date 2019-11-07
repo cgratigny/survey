@@ -1,0 +1,4 @@
+- if ActiveModel::Type::Boolean.new.cast(item_options["value"]) == true
+  %span.fal.fa-check-square
+- else
+  %span.fal.fa-square
