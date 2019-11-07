@@ -10,7 +10,7 @@ module HummingbirdSurvey
 
       classy_enum_attr :question_type, enum: "SurveyQuestionType", allow_blank: true
 
-      store_accessor :data, [:answer_list, :linked_field_name]
+      store_accessor :data, [:answer_list, :linked_field_name, *SurveyQuestionType.new.all_fields]
     end
 
     def survey_page
@@ -27,6 +27,10 @@ module HummingbirdSurvey
 
     def requires_answer_list?
       question_type.present? ? question_type.requires_answer_list? : false
+    end
+
+    def fields
+      question_type.fields.any? ? question_type.fields : false
     end
 
     def actually_required?(flat_answer_data)

@@ -6,6 +6,14 @@ class SurveyQuestionType < ClassyEnum::Base
   def response_partial
     :default
   end
+
+  def fields
+    []
+  end
+
+  def all_fields
+    SurveyQuestionType.all.map{|type| type.fields}.flatten.uniq
+  end
 end
 
 class SurveyQuestionType::Encrypted < SurveyQuestionType
@@ -25,6 +33,12 @@ class SurveyQuestionType::TextField < SurveyQuestionType
     "Short Answer"
   end
 
+end
+
+class SurveyQuestionType::Agreement < SurveyQuestionType
+  def fields
+    [:agree_text]
+  end
 end
 
 class SurveyQuestionType::TextArea < SurveyQuestionType
