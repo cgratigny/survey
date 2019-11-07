@@ -1,0 +1,4 @@
+- if item_options["value"].is_a?(Array)
+  = item_options["value"].reject{ |r| r.empty? }.to_sentence(last_word_connector: ", ")
+- else
+  = item_options["value"]
