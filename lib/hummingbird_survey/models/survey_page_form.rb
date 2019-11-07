@@ -153,6 +153,15 @@ module HummingbirdSurvey
       result
     end
 
+    def answer_value(value, item)
+      case item.survey_itemable.question_type
+      when SurveyQuestionType::Encrypted.new
+        EncryptionService.encrypt(value)
+      else
+        value
+      end
+    end
+
     def add_final_item(hash, item)
       case item.survey_itemable_type
       when "SurveyQuestion"
@@ -160,7 +169,7 @@ module HummingbirdSurvey
           "item_number" => item.item_number,
           "label" => item.survey_itemable.label,
           "question_type" => item.survey_itemable.question_type.to_s,
-          "value" => all_answer_data["question_#{item.survey_itemable.id}"]
+          "value" => answer_value(all_answer_data["question_#{item.survey_itemable.id}"], item)
         }
       when "SurveySection"
         hash["section_#{item.survey_itemable.id}"] = {

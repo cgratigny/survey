@@ -3,22 +3,36 @@ class SurveyQuestionType < ClassyEnum::Base
     false
   end
 
+  def response_partial
+    :default
+  end
+
   def fields
     []
   end
 
   def all_fields
-    [:agree_text]
+    SurveyQuestionType.all.map{|type| type.fields}.flatten.uniq
   end
 end
 
 class SurveyQuestionType::Encrypted < SurveyQuestionType
+  def response_partial
+    :encrypted
+  end
 end
 
 class SurveyQuestionType::Signature < SurveyQuestionType
+  def response_partial
+    :signature
+  end
 end
 
 class SurveyQuestionType::TextField < SurveyQuestionType
+  def text
+    "Short Answer"
+  end
+
 end
 
 class SurveyQuestionType::Review < SurveyQuestionType
@@ -31,6 +45,13 @@ class SurveyQuestionType::Agreement < SurveyQuestionType
 end
 
 class SurveyQuestionType::TextArea < SurveyQuestionType
+  def text
+    "Paragraph Answer"
+  end
+
+  def response_partial
+    :text_area
+  end
 end
 
 class SurveyQuestionType::RadioButtons < SurveyQuestionType
@@ -43,11 +64,25 @@ class SurveyQuestionType::Checkbox < SurveyQuestionType
   def requires_answer_list?
     true
   end
+
+  def response_partial
+    :checkbox
+  end
 end
 
 class SurveyQuestionType::Select < SurveyQuestionType
   def requires_answer_list?
     true
+  end
+end
+
+class SurveyQuestionType::MultiSelect < SurveyQuestionType
+  def requires_answer_list?
+    true
+  end
+
+  def response_partial
+    :multi_select
   end
 end
 
