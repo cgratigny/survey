@@ -2,6 +2,14 @@ class SurveyQuestionType < ClassyEnum::Base
   def requires_answer_list?
     false
   end
+
+  def fields
+    []
+  end
+
+  def all_fields
+    [:agree_text]
+  end
 end
 
 class SurveyQuestionType::Encrypted < SurveyQuestionType
@@ -11,6 +19,12 @@ class SurveyQuestionType::Signature < SurveyQuestionType
 end
 
 class SurveyQuestionType::TextField < SurveyQuestionType
+end
+
+class SurveyQuestionType::Agreement < SurveyQuestionType
+  def fields
+    [:agree_text]
+  end
 end
 
 class SurveyQuestionType::TextArea < SurveyQuestionType

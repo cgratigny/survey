@@ -9,6 +9,8 @@
     = f.input "question_#{survey_itemable.id}", as: :select, label: survey_itemable.label, required: survey_itemable.required?, item_wrapper_class: "inline", collection: survey_itemable.answer_list, label_method: :to_s, value_method: :to_s, input_html: { "data-placeholder" => "Please Select" }
   - when SurveyQuestionType::Signature.new
     = f.input "question_#{survey_itemable.id}", as: :signature, label: survey_itemable.label, required: survey_itemable.required?
+  - when SurveyQuestionType::Agreement.new
+    = f.input "question_#{survey_itemable.id}", as: :agreement, label: survey_itemable.agree_text, input_html: { agreement: survey_itemable.label.html_safe }, required: survey_itemable.required?
   - when SurveyQuestionType::CountrySelect.new
     = render "common/address/country_select", form: f, field_name: "question_#{survey_itemable.id}", label: survey_itemable.label, required: survey_itemable.required?, country_select_id: "question_#{survey_itemable.id}_country"
   - when SurveyQuestionType::RegionSelect.new
