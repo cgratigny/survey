@@ -30,7 +30,7 @@ module HummingbirdSurvey
     end
 
     def fields
-      question_type.fields.any? ? question_type.fields : false
+      (question_type.present? && question_type.fields.any?) ? question_type.fields : false
     end
 
     def actually_required?(flat_answer_data)
