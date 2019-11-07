@@ -21,6 +21,9 @@ end
 class SurveyQuestionType::TextField < SurveyQuestionType
 end
 
+class SurveyQuestionType::Review < SurveyQuestionType
+end
+
 class SurveyQuestionType::Agreement < SurveyQuestionType
   def fields
     [:agree_text]

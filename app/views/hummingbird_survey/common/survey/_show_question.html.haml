@@ -1,8 +1,9 @@
-.response-block
-  .question-text
-    = item_options["label"]
-  .response
-    - if SurveyQuestionType[item_options["question_type"]].signature?
-      = image_tag(item_options["value"])
-    - else
-      = item_options["value"]
+- unless SurveyQuestionType[item_options["question_type"]].review?
+  .response-block
+    .question-text
+      = item_options["label"]
+    .response
+      - if SurveyQuestionType[item_options["question_type"]].signature?
+        = image_tag(item_options["value"])
+      - else
+        = item_options["value"]
