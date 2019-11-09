@@ -32,7 +32,6 @@ class SurveyQuestionType::TextField < SurveyQuestionType
   def text
     "Short Answer"
   end
-
 end
 
 class SurveyQuestionType::Review < SurveyQuestionType
@@ -90,4 +89,7 @@ class SurveyQuestionType::CountrySelect < SurveyQuestionType
 end
 
 class SurveyQuestionType::RegionSelect < SurveyQuestionType
+  def fields
+    [:country_question_id]
+  end
 end
