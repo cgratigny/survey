@@ -6,7 +6,7 @@
 = survey_itemable.label
 = "(#{survey_itemable.question_type})"
 - if survey_itemable.required?
-  =" *"
+  = " *"
 
 - if survey_itemable.requires_answer_list?
   %p

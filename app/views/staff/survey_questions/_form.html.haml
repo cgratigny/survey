@@ -14,7 +14,7 @@
 
       - if f.object.fields.present?
         - f.object.fields.each do |field|
-          = f.input field.to_sym, input_html: { value: f.object.try(field) }
+          = f.input field.to_sym, as: :string, input_html: { value: f.object.try(field) }
 
       - if f.object.survey.surveyable.linked_field_names.any?
         = f.input :linked_field_name, as: :select, collection: f.object.survey.surveyable.linked_field_names.map{ |field_name, field_options| [field_options[:label], field_name] }, include_blank: "None"
