@@ -1,5 +1,5 @@
 %p= simple_format(survey_itemable.label.html_safe)
 
-- f.object.survey.surveyed_data_for(f.object.surveyed).sort_by{|page_options, page_name| page_options["page_number"]}.each do |page_options, page_name|
+- f.object.survey.surveyed_data_for(f.object.surveyed).sort_by{|page_name, page_options| page_options.is_a?(Hash) ? page_options["page_number"].to_i : page_name.to_s}.each do |page_name, page_options|
   .block.as-section
     = render "hummingbird_survey/common/survey/show_page", page_options: page_options, edit_link: DynamicPath.new.visit_page_path(f.object.surveyed, page_name)

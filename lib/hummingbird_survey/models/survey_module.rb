@@ -21,20 +21,20 @@ module HummingbirdSurvey
     end
 
     def surveyed_data_for(surveyed_obj)
-      if surveyed_obj.blank?
-        Hash.new
-      else
+      result = Hash.new
+
+      if surveyed_obj.present?
         survey_response = survey_response_for(surveyed_obj)
         if survey_response.present?
           if sub_obj.present?
-            survey_response.answers_data["#{sub_obj.class.name}_#{sub_obj.id}"] || {}
+            result = survey_response.answers_data["#{sub_obj.class.name}_#{sub_obj.id}"] || {}
           else
-            survey_response.answers_data
+            result = survey_response.answers_data
           end
-        else
-          {}
         end
       end
+
+      result
     end
 
     def answer_for_question(surveyed_obj, question_id)
@@ -151,10 +151,9 @@ module HummingbirdSurvey
       surveyed_data = surveyed_data_for(surveyed_obj)
       page_key = "page_#{given_page.id}"
 
-      return if surveyed_data[page_key].present? && surveyed_data[page_key]["started_at"].present?
-
       surveyed_data[page_key] = {} if surveyed_data[page_key].blank?
-      surveyed_data[page_key]["started_at"] = Time.zone.now
+      surveyed_data[page_key]["page_number"] = given_page.page_number
+      surveyed_data[page_key]["started_at"] ||= Time.zone.now
       set_surveyed_data_for!(surveyed_obj, surveyed_data)
     end
 
