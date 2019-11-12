@@ -44,7 +44,7 @@ module HummingbirdSurvey
     end
 
     def display_page_number
-      page_number.to_i + survey.pages_before
+      page_number.to_s.to_i + survey.pages_before.to_s.to_i
     end
 
     def display_title_with_number
