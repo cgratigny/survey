@@ -12,7 +12,7 @@ module HummingbirdSurvey
     end
 
     def total_page_count
-      self.survey_pages.count + pages_before + pages_after
+      self.survey_pages.count + pages_before.to_s.to_i + pages_after.to_s.to_i
     end
 
     def survey_response_for(surveyed_obj)
