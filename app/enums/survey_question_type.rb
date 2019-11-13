@@ -89,7 +89,4 @@ class SurveyQuestionType::CountrySelect < SurveyQuestionType
 end
 
 class SurveyQuestionType::RegionSelect < SurveyQuestionType
-  def fields
-    [:country_question_id]
-  end
 end

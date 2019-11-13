@@ -10,7 +10,9 @@ module HummingbirdSurvey
 
       classy_enum_attr :question_type, enum: "SurveyQuestionType", allow_blank: true
 
-      store_accessor :data, [:answer_list, :linked_field_name, *SurveyQuestionType.new.all_fields]
+      store_accessor :data, [:answer_list, :linked_field_name, :country_question_id, *SurveyQuestionType.new.all_fields]
+
+      scope :by_type, ->(given_type) { where(question_type: given_type.to_s) }
     end
 
     def survey_page
@@ -34,9 +36,6 @@ module HummingbirdSurvey
     end
 
     def actually_required?(flat_answer_data)
-      ap "checking if question #{label} #{id} is actually required"
-      ap "required? #{required?}"
-      ap "full display? #{survey_item.full_display?(flat_answer_data)}"
       required? && survey_item.full_display?(flat_answer_data)
     end
 
