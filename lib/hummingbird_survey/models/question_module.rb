@@ -31,6 +31,10 @@ module HummingbirdSurvey
       question_type.present? ? question_type.requires_answer_list? : false
     end
 
+    def requires_country_link?
+      question_type.present? ? question_type.region_select? : false
+    end
+
     def fields
       (question_type.present? && question_type.fields.any?) ? question_type.fields : false
     end
