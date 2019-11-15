@@ -12,7 +12,7 @@
       - if f.object.requires_answer_list?
         = f.input :answer_list, input_html: { value: f.object.answer_list.to_a.join(",") }
 
-      - if f.object.question_type.region_select?
+      - if f.object.question_type.present? && f.object.question_type.region_select?
         = f.input :country_question_id, as: :select, collection: @survey.survey_questions.by_type(SurveyQuestionType[:country_select]).map{ |question| [question.label, question.id] }
 
       - if f.object.fields.present?
