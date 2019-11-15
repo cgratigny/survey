@@ -60,7 +60,11 @@ module HummingbirdSurvey
     def parse_attributes(params)
       target_params = params["survey_page_form"].permit!
       questions.each do |question|
-        send("#{question.qkey}=", target_params[question.qkey])
+        value = target_params[question.qkey]
+        if value.is_a?(Array)
+          value = value.reject(&:blank?)
+        end
+        send("#{question.qkey}=", value)
       end
       @save_and_exit = params["save_and_exit"]
     end
@@ -97,6 +101,8 @@ module HummingbirdSurvey
       required_questions.each do |question|
         if question.question_type.checkbox?
           errors.add(question.qkey.to_sym, "is required") if question.actually_required?(all_answer_data) && send(question.qkey.to_sym).to_s != "1"
+        elsif question.question_type.multi_select?
+          errors.add(question.qkey.to_sym, "is required") if question.actually_required?(all_answer_data) && (send(question.qkey.to_sym).blank? || send(question.qkey.to_sym).empty?)
         else
           errors.add(question.qkey.to_sym, "is required") if question.actually_required?(all_answer_data) && send(question.qkey.to_sym).blank?
         end
