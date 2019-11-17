@@ -41,6 +41,10 @@ class SurveyQuestionType::Agreement < SurveyQuestionType
   def fields
     [:agree_text]
   end
+
+  def response_partial
+    :agreement
+  end
 end
 
 class SurveyQuestionType::TextArea < SurveyQuestionType
