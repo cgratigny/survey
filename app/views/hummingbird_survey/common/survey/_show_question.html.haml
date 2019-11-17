@@ -1,7 +1,7 @@
 - unless SurveyQuestionType[item_options["question_type"]].review?
+  - survey_question_type = SurveyQuestionType[item_options["question_type"]]
   .response-block{ id: "response-block-#{item_options["item_number"]}"}
     .question-text{ id: "question-text-#{item_options["item_number"]}"}
-      = item_options["label"]
+      = item_options["label"].html_safe
     .response{ id: "response-#{item_options["item_number"]}"}
-      - survey_question_type = SurveyQuestionType[item_options["question_type"]]
       = render "hummingbird_survey/common/survey/response/#{survey_question_type.response_partial}", item_options: item_options
