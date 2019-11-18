@@ -13,6 +13,8 @@ module HummingbirdSurvey
     end
 
     def value_matches_parent?(string_answer)
+      string_answer = string_answer.to_s
+
       result = false
       case operator
       when "="
@@ -26,11 +28,21 @@ module HummingbirdSurvey
     end
 
     def answer_same_page?
-      answer.page_obj == showable.page_obj
+      answer.present? && answer.page_obj == showable.page_obj
+    end
+
+    # overriden in dragonfly to use the given_questionnaire
+    # override in hummingbird to pass a hash instead and use that
+    def find_answer_value(given_questionnaire = nil)
+      if answer.present?
+        answer.find_value
+      else
+        ""
+      end
     end
 
     def show?
-      answer_same_page? || value_matches_parent?(answer.find_value)
+      answer_same_page? || value_matches_parent?(find_answer_value)
     end
 
     ### Code for the new ShowIfs used in the new Survey code ###
