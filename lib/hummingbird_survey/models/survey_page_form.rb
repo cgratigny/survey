@@ -169,6 +169,8 @@ module HummingbirdSurvey
     end
 
     def add_final_item(hash, item)
+      return unless item.full_display?(all_answer_data)
+
       case item.survey_itemable_type
       when "SurveyQuestion"
         hash["question_#{item.survey_itemable.id}"] = {
