@@ -14,6 +14,10 @@ class SurveyQuestionType < ClassyEnum::Base
   def all_fields
     SurveyQuestionType.all.map{|type| type.fields}.flatten.uniq
   end
+
+  def checkbox_type?
+    false
+  end
 end
 
 class SurveyQuestionType::Encrypted < SurveyQuestionType
@@ -38,6 +42,10 @@ class SurveyQuestionType::Review < SurveyQuestionType
 end
 
 class SurveyQuestionType::Agreement < SurveyQuestionType
+  def checkbox_type?
+    true
+  end
+
   def fields
     [:agree_text]
   end
@@ -64,6 +72,10 @@ class SurveyQuestionType::RadioButtons < SurveyQuestionType
 end
 
 class SurveyQuestionType::Checkbox < SurveyQuestionType
+  def checkbox_type?
+    true
+  end
+
   def requires_answer_list?
     true
   end
