@@ -99,7 +99,7 @@ module HummingbirdSurvey
 
     def required_questions_presence
       required_questions.each do |question|
-        if question.question_type.checkbox?
+        if question.question_type.checkbox_type?
           errors.add(question.qkey.to_sym, "is required") if question.actually_required?(all_answer_data) && send(question.qkey.to_sym).to_s != "1"
         elsif question.question_type.multi_select?
           errors.add(question.qkey.to_sym, "is required") if question.actually_required?(all_answer_data) && (send(question.qkey.to_sym).blank? || send(question.qkey.to_sym).empty?)
