@@ -50,17 +50,21 @@ module HummingbirdSurvey
     end
 
     def answer_for_question_in_container(container_data, question_id)
+      answer = ""
+
       container_data.each do |item_key, item_data|
         if item_key.start_with?("question")
-          if item_key.end_with?(question_id.to_s)
+          chunks = item_key.to_s.split("_")
+          if chunks.last.to_s == question_id.to_s
             return item_data["value"]
           end
         elsif item_key.start_with?("section")
-          return answer_for_question_in_container(item_data["items"], question_id)
+          answer = answer_for_question_in_container(item_data["items"], question_id)
+          return answer unless answer.blank?
         end
       end
 
-      ""
+      answer
     end
 
     def questions_linked_to(field_name)
