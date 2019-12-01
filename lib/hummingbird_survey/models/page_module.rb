@@ -10,6 +10,8 @@ module HummingbirdSurvey
       after_commit :update_page_numbers
 
       scope :in_order, -> { order("survey_pages.page_number ASC") }
+
+      accepts_nested_attributes_for :survey_items, allow_destroy: true
     end
 
     # to end the recursion for survey_items and children

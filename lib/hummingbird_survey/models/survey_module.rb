@@ -11,6 +11,7 @@ module HummingbirdSurvey
       has_many :survey_pages, dependent: :destroy
 
       classy_enum_attr :survey_type, enum: "SurveyType"
+      accepts_nested_attributes_for :survey_pages, allow_destroy: true
     end
 
     def total_page_count
