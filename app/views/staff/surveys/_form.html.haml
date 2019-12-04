@@ -18,7 +18,7 @@
   .block.as-section
     .form-inputs
       = f.input :display_name
-
+      = f.input :survey_type, collection: SurveyType.select_options
       = f.input :pages_before
       = f.input :pages_after
 

@@ -4,6 +4,7 @@ module HummingbirdSurvey
 
     included do
       has_one :survey_item, as: :survey_itemable
+      has_many :survey_question_options
 
       # want to make sure no show ifs try to reference a question that's not there anymore
       has_many :show_ifs, dependent: :destroy
@@ -13,6 +14,9 @@ module HummingbirdSurvey
       store_accessor :data, [:answer_list, :linked_field_name, :country_question_id, *SurveyQuestionType.new.all_fields]
 
       scope :by_type, ->(given_type) { where(question_type: given_type.to_s) }
+      accepts_nested_attributes_for :survey_question_options, allow_destroy: true
+
+      validates :label, :question_type, presence: true
     end
 
     def survey_page

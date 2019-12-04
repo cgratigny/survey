@@ -9,6 +9,9 @@ module HummingbirdSurvey
       attr_accessor :sub_obj # temporary object used to further granularize surveys - one survey can be used for multiple objects. Set this before you use the other methods
 
       has_many :survey_pages, dependent: :destroy
+
+      classy_enum_attr :survey_type, enum: "SurveyType"
+      accepts_nested_attributes_for :survey_pages, allow_destroy: true
     end
 
     def total_page_count
