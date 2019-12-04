@@ -1,6 +1,6 @@
 - unless SurveyQuestionType[item_options["question_type"]].review?
   - survey_question_type = SurveyQuestionType[item_options["question_type"]]
-  .response-block{ id: "response-block-#{item_options["item_number"]}"}
+  .response-block{ id: "response-block-#{item_options["item_number"]}", class: "response-type-#{survey_question_type.to_s.dasherize}"}
     .question-text{ id: "question-text-#{item_options["item_number"]}"}
       = item_options["label"].html_safe
     .response{ id: "response-#{item_options["item_number"]}"}
