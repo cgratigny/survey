@@ -4,7 +4,6 @@
     .question-text{ id: "question-text-#{item_options["item_number"]}"}
       = item_options["label"].html_safe
       - if survey_question_type.to_s.dasherize == "agreement"
-        = item_options["agreement_text"]
-        = item_options.inspect
+        -# show agreement_text / checkbox label text
     .response{ id: "response-#{item_options["item_number"]}"}
       = render "hummingbird_survey/common/survey/response/#{survey_question_type.response_partial}", item_options: item_options
