@@ -3,5 +3,8 @@
   .response-block{ id: "response-block-#{item_options["item_number"]}", class: "response-type-#{survey_question_type.to_s.dasherize}"}
     .question-text{ id: "question-text-#{item_options["item_number"]}"}
       = item_options["label"].html_safe
+      - if survey_question_type.to_s.dasherize == "agreement"
+        = item_options["agreement_text"]
+        - raise item_options["agreement_text"]
     .response{ id: "response-#{item_options["item_number"]}"}
       = render "hummingbird_survey/common/survey/response/#{survey_question_type.response_partial}", item_options: item_options
