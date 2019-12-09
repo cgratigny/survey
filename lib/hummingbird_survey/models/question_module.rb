@@ -16,7 +16,7 @@ module HummingbirdSurvey
       scope :by_type, ->(given_type) { where(question_type: given_type.to_s) }
       accepts_nested_attributes_for :survey_question_options, allow_destroy: true
 
-      validates :label, :question_type, presence: true
+      # validates :label, :question_type, presence: true
     end
 
     def survey_page
