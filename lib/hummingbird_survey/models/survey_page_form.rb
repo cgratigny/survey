@@ -58,7 +58,7 @@ module HummingbirdSurvey
     end
 
     def parse_attributes(params)
-      target_params = params["survey_page_form"].permit!
+      target_params = params[self.class.name.to_s.underscore].permit!
       questions.each do |question|
         value = target_params[question.qkey]
         if value.is_a?(Array)
