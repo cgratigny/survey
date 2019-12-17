@@ -14,6 +14,8 @@ module HummingbirdSurvey
       has_one :self_ref, class_name: self.to_s, foreign_key: :id
       has_one :survey_question, through: :self_ref, source: :survey_itemable, source_type: "SurveyQuestion"
       accepts_nested_attributes_for :survey_question, allow_destroy: true
+
+      scope :by_survey_itemable_type, -> (survey_itemable_type) { where(survey_itemable_type: survey_itemable_type)}
     end
 
     def survey_page
