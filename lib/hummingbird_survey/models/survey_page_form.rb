@@ -177,7 +177,7 @@ module HummingbirdSurvey
       })
     end
 
-    def final_section_hash(item)
+    def base_section_hash(item)
       base_itemable_data(item).merge!({
         "title" => item.survey_itemable.title,
         "items" => {}
@@ -199,7 +199,7 @@ module HummingbirdSurvey
       when "SurveyQuestion"
         hash["question_#{item.survey_itemable.id}"] = final_question_hash(item)
       when "SurveySection"
-        hash["section_#{item.survey_itemable.id}"] = final_section_hash(item)
+        hash["section_#{item.survey_itemable.id}"] = base_section_hash(item)
 
         item.survey_itemable.survey_items.each do |sub_item|
           add_final_item(hash["section_#{item.survey_itemable.id}"]["items"], sub_item)
