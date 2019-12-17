@@ -58,7 +58,7 @@ module HummingbirdSurvey
     end
 
     def parse_attributes(params)
-      target_params = params["survey_page_form"].permit!
+      target_params = params[self.class.name.to_s.underscore].permit!
       questions.each do |question|
         value = target_params[question.qkey]
         if value.is_a?(Array)
@@ -168,23 +168,38 @@ module HummingbirdSurvey
       end
     end
 
+    def final_question_hash(item)
+      base_itemable_data(item).merge!({
+        "label" => item.survey_itemable.label,
+        "question_type" => item.survey_itemable.question_type.to_s,
+        "value" => answer_value(all_answer_data["question_#{item.survey_itemable.id}"], item),
+        "question_id" => item.survey_itemable.id,
+      })
+    end
+
+    def final_section_hash(item)
+      base_itemable_data(item).merge!({
+        "title" => item.survey_itemable.title,
+        "items" => {}
+      })
+    end
+
+    def base_itemable_data(item)
+      {
+        "item_number" => item.item_number,
+        "item_id" => item.id,
+        "survey_type" => survey.survey_type
+      }
+    end
+
     def add_final_item(hash, item)
       return unless item.full_display?(all_answer_data)
 
       case item.survey_itemable_type
       when "SurveyQuestion"
-        hash["question_#{item.survey_itemable.id}"] = {
-          "item_number" => item.item_number,
-          "label" => item.survey_itemable.label,
-          "question_type" => item.survey_itemable.question_type.to_s,
-          "value" => answer_value(all_answer_data["question_#{item.survey_itemable.id}"], item)
-        }
+        hash["question_#{item.survey_itemable.id}"] = final_question_hash(item)
       when "SurveySection"
-        hash["section_#{item.survey_itemable.id}"] = {
-          "item_number" => item.item_number,
-          "title" => item.survey_itemable.title,
-          "items" => {}
-        }
+        hash["section_#{item.survey_itemable.id}"] = final_section_hash(item)
 
         item.survey_itemable.survey_items.each do |sub_item|
           add_final_item(hash["section_#{item.survey_itemable.id}"]["items"], sub_item)

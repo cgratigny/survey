@@ -6,3 +6,6 @@ end
 
 class SurveyType::Quiz < SurveyType
 end
+
+class SurveyType::AssignmentSurvey < SurveyType
+end
