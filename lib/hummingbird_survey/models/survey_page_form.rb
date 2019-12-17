@@ -113,7 +113,6 @@ module HummingbirdSurvey
       survey.surveyed_data_for(surveyed)
     end
 
-
     def build_answer_data
       @all_answer_data = {}
 

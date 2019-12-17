@@ -37,7 +37,7 @@ module HummingbirdSurvey
         end
       end
 
-      result.sort_by{|page_name, page_options| page_options["page_number"]}
+      result
     end
 
     def surveyed_data_for_in_order(surveyed_obj)
