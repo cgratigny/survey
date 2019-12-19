@@ -179,6 +179,10 @@ module HummingbirdSurvey
           "question_type" => item.survey_itemable.question_type.to_s,
           "value" => answer_value(all_answer_data["question_#{item.survey_itemable.id}"], item)
         }
+
+        if item.survey_itemable.question_type.agreement?
+          hash["question_#{item.survey_itemable.id}"]["agree_text"] = item.survey_itemable.agree_text
+        end
       when "SurveySection"
         hash["section_#{item.survey_itemable.id}"] = {
           "item_number" => item.item_number,
