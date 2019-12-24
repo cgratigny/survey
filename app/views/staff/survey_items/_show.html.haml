@@ -21,4 +21,4 @@
   .survey-iten-block
     .col-sm-12.col-md
       = simple_form_for SurveyPageForm.new(survey_page: survey_item.survey_page), url: "#" do |f|
-        = render "hummingbird_survey/common/survey/answer_#{survey_item.survey_itemable_type.underscore}", f: f, survey_itemable: survey_item.survey_itemable
+        = render "hummingbird_survey/common/survey/answer_#{survey_item.survey_itemable_type.underscore}", f: f, survey_itemable: survey_item.survey_itemable, survey_item: survey_item
