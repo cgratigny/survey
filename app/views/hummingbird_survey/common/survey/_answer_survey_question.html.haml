@@ -1,4 +1,4 @@
-- item_label_html = "<em data-item-number='#{survey_item.item_number}}'></em>#{survey_itemable.label}".html_safe
+- item_label_html = "<em data-item-number='#{survey_item.item_number}'></em>#{survey_itemable.label}".html_safe
 - case survey_itemable.question_type
   - when SurveyQuestionType::TextArea.new
     = f.input "question_#{survey_itemable.id}", as: :text, label: item_label_html, required: survey_itemable.required?
