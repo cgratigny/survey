@@ -1,17 +1,18 @@
+- item_label_html = "<em data-item-number='#{survey_itemable.item_number}}'></em>#{survey_itemable.label}".html_safe
 - case survey_itemable.question_type
   - when SurveyQuestionType::TextArea.new
-    = f.input "question_#{survey_itemable.id}", as: :text, label: survey_itemable.label, required: survey_itemable.required?
+    = f.input "question_#{survey_itemable.id}", as: :text, label: item_label_html, required: survey_itemable.required?
   - when SurveyQuestionType::RadioButtons.new
     - if survey_itemable.survey_item.survey.survey_type.quiz?
-      = f.input "question_#{survey_itemable.id}", as: :radio_buttons, label: survey_itemable.label, item_wrapper_class: "inline", collection: survey_itemable.survey_question_options, required: survey_itemable.required?
+      = f.input "question_#{survey_itemable.id}", as: :radio_buttons, label: item_label_html, item_wrapper_class: "inline", collection: survey_itemable.survey_question_options, required: survey_itemable.required?
     - else
-      = f.input "question_#{survey_itemable.id}", as: :radio_buttons, label: survey_itemable.label, item_wrapper_class: "inline", collection: survey_itemable.answer_list, required: survey_itemable.required?
+      = f.input "question_#{survey_itemable.id}", as: :radio_buttons, label: item_label_html, item_wrapper_class: "inline", collection: survey_itemable.answer_list, required: survey_itemable.required?
   - when SurveyQuestionType::MultiSelect.new
-    = f.input "question_#{survey_itemable.id}", as: :multi_select, label: survey_itemable.label, item_wrapper_class: "inline", collection: survey_itemable.answer_list, required: survey_itemable.required?
+    = f.input "question_#{survey_itemable.id}", as: :multi_select, label: item_label_html, item_wrapper_class: "inline", collection: survey_itemable.answer_list, required: survey_itemable.required?
   - when SurveyQuestionType::Checkbox.new
     = f.input "question_#{survey_itemable.id}", as: :boolean, label: false, item_wrapper_class: "inline", label_method: :to_s, value_method: :to_s, inline_label: survey_itemable.label, required: true
   - when SurveyQuestionType::Select.new
-    = f.input "question_#{survey_itemable.id}", as: :select, label: survey_itemable.label, required: survey_itemable.required?, item_wrapper_class: "inline", collection: survey_itemable.answer_list, label_method: :to_s, value_method: :to_s, input_html: { "data-placeholder" => "Please Select" }
+    = f.input "question_#{survey_itemable.id}", as: :select, label: item_label_html, required: survey_itemable.required?, item_wrapper_class: "inline", collection: survey_itemable.answer_list, label_method: :to_s, value_method: :to_s, input_html: { "data-placeholder" => "Please Select" }
   - when SurveyQuestionType::Signature.new
     = f.input "question_#{survey_itemable.id}", as: :signature, label: survey_itemable.label, required: survey_itemable.required?
   - when SurveyQuestionType::Review.new
@@ -19,10 +20,10 @@
   - when SurveyQuestionType::Agreement.new
     = f.input "question_#{survey_itemable.id}", as: :agreement, label: survey_itemable.agree_text, input_html: { agreement: survey_itemable.label.html_safe }, required: survey_itemable.required?
   - when SurveyQuestionType::CountrySelect.new
-    = render "common/address/country_select", form: f, field_name: "question_#{survey_itemable.id}", label: survey_itemable.label, required: survey_itemable.required?, country_select_id: "question_#{survey_itemable.id}_country"
+    = render "common/address/country_select", form: f, field_name: "question_#{survey_itemable.id}", label: item_label_html, required: survey_itemable.required?, country_select_id: "question_#{survey_itemable.id}_country"
   - when SurveyQuestionType::RegionSelect.new
-    = render "common/address/region_select", form: f, field_name: "question_#{survey_itemable.id}", label: survey_itemable.label, required: survey_itemable.required?, country_select_id: "question_#{survey_itemable.country_question_id}_country", country_code: f.object.all_answer_data["question_#{survey_itemable.country_question_id}"]
+    = render "common/address/region_select", form: f, field_name: "question_#{survey_itemable.id}", label: item_label_html, required: survey_itemable.required?, country_select_id: "question_#{survey_itemable.country_question_id}_country", country_code: f.object.all_answer_data["question_#{survey_itemable.country_question_id}"]
   - when SurveyQuestionType::Encrypted.new
-    = f.input "question_#{survey_itemable.id}", as: :encrypted, label: survey_itemable.label, required: survey_itemable.required?
+    = f.input "question_#{survey_itemable.id}", as: :encrypted, label: item_label_html, required: survey_itemable.required?
   - else
-    = f.input "question_#{survey_itemable.id}", label: survey_itemable.label, required: survey_itemable.required?
+    = f.input "question_#{survey_itemable.id}", label: item_label_html, required: survey_itemable.required?
