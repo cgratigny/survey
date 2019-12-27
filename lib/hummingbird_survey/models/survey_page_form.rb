@@ -57,8 +57,16 @@ module HummingbirdSurvey
       @save_and_exit.present?
     end
 
+    def permitted_params(params)
+      if params[self.class.name.to_s.underscore].present?
+        params[self.class.name.to_s.underscore].permit!
+      else
+        {}
+      end
+    end
+
     def parse_attributes(params)
-      target_params = params[self.class.name.to_s.underscore].permit!
+      target_params = permitted_params(params)
       questions.each do |question|
         value = target_params[question.qkey]
         if value.is_a?(Array)
