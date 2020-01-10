@@ -59,6 +59,13 @@ module HummingbirdSurvey
       target_itemable.survey_item = target_item
       target_itemable.save!
 
+      if survey_itemable.is_a?(SurveyQuestion)
+        survey_itemable.survey_question_options.each do |survey_question_option|
+          target_survey_question_option = survey_question_option.duplicate!
+          target_survey_question_option.update!(survey_question: target_itemable)
+        end
+      end
+
       target_item
     end
   end
