@@ -97,6 +97,12 @@ module HummingbirdSurvey
       survey_data["page_#{self.id}"] || {}
     end
 
+    def update_page_numbers
+      survey.survey_pages.in_order.each.with_index(1) do |page, index|
+        page.update_column(:page_number, index)
+      end
+    end
+
     def duplicate!
       target_page = super
 
@@ -109,10 +115,5 @@ module HummingbirdSurvey
       target_page
     end
 
-    def update_page_numbers
-      survey.survey_pages.in_order.each.with_index(1) do |page, index|
-        page.update_column(:page_number, index)
-      end
-    end
   end
 end
