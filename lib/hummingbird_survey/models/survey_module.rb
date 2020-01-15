@@ -40,6 +40,10 @@ module HummingbirdSurvey
       result
     end
 
+    def surveyed_data_for_in_order(surveyed_obj)
+      surveyed_data_for(surveyed_obj).sort_by{|page_name, page_options| page_options["page_number"]}
+    end
+
     def answer_for_question(surveyed_obj, question_id)
       surveyed_data = surveyed_data_for(surveyed_obj)
       answer = ""
