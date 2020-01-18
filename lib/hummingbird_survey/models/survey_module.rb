@@ -198,6 +198,7 @@ module HummingbirdSurvey
     end
 
     def duplicate!
+
       target_survey = super
 
       survey_pages.each do |page|
