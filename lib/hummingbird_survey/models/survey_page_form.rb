@@ -205,6 +205,11 @@ module HummingbirdSurvey
       case item.survey_itemable_type
       when "SurveyQuestion"
         hash["question_#{item.survey_itemable.id}"] = final_question_hash(item)
+
+
+        if item.survey_itemable.question_type.agreement?
+          hash["question_#{item.survey_itemable.id}"]["agree_text"] = item.survey_itemable.agree_text
+        end
       when "SurveySection"
         hash["section_#{item.survey_itemable.id}"] = base_section_hash(item)
 
