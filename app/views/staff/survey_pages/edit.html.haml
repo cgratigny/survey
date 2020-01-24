@@ -3,5 +3,6 @@
 
   .button-group
     = link_to 'Back', edit_staff_survey_path(@survey), class: "back-button btn btn-primary button-group-item"
+    = link_to 'Delete', staff_survey_page_path(@survey_page), method: :delete, class: "align-right btn btn-primary button-group-item"
 
 .primary-form-type.full-page-form.using-blocks= render 'form', target_path: staff_survey_page_path(@survey, @survey_page), target_method: "patch"
