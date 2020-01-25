@@ -103,12 +103,11 @@ module HummingbirdSurvey
       end
     end
 
-    def duplicate!
-      target_page = super
+    def duplicate!(args = {})
+      target_page = super(args)
 
       survey_items.each do |survey_item|
-        target_item = survey_item.duplicate!
-        target_item.parent = target_page
+        target_item = survey_item.duplicate!( parent: target_page )
         target_item.save!
       end
 

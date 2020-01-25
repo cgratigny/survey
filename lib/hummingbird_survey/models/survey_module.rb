@@ -197,13 +197,12 @@ module HummingbirdSurvey
       page = SurveyPage.create!(survey: self, title: title, page_number: number)
     end
 
-    def duplicate!
+    def duplicate!(args = {})
 
-      target_survey = super
+      target_survey = super(args)
 
       survey_pages.each do |page|
-        target_page = page.duplicate!
-        target_page.survey = target_survey
+        target_page = page.duplicate!( survey: target_survey )
         target_page.save!
       end
 

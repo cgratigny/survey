@@ -46,8 +46,8 @@ module HummingbirdSurvey
       show_if.present? ? show_if.target_value.to_s : nil
     end
 
-    def duplicate!
-      target_item = super
+    def duplicate!(args = {})
+      target_item = super(args)
 
       if show_if.present?
         target_show_if = show_if.duplicate!
