@@ -9,7 +9,7 @@ module HummingbirdSurvey
     def responses_for_surveyed(surveyed_obj)
       responses = []
       questions.each do |question|
-        responses << { answer: answer_for_question(surveyed_obj, question.id), question: question }
+        responses << { answer: survey.answer_for_question(surveyed_obj, question.id), question: question }
       end
       responses
     end
