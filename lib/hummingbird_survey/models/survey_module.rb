@@ -5,6 +5,7 @@ module HummingbirdSurvey
     included do
       belongs_to :surveyable, polymorphic: true
       has_many :survey_responses
+      has_many :survey_response_views
 
       attr_accessor :sub_obj # temporary object used to further granularize surveys - one survey can be used for multiple objects. Set this before you use the other methods
 

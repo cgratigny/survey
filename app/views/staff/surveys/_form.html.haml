@@ -26,6 +26,18 @@
     = render "common/global_form_submit", f: f, cancel_path: DynamicPath.new.surveyable_path(@survey)
 
 .survey-config.faux-form
+  .block.as-section
+    %h3 Response Views
+    %p Response views allow you to choose questions for those responses to be displayed in different areas of the application.
+
+    = link_to "New Response View", new_staff_survey_survey_response_view_path(@survey), class: "btn btn-primary button-group-item align-right"
+
+    %ul
+      - @survey.survey_response_views.each do |response_view|
+        %li
+          = link_to response_view.name, [:edit, :staff, @survey, response_view]
+
+.survey-config.faux-form
   - @survey.survey_pages.in_order.each do |page|
     .block.as-section
       %h3
