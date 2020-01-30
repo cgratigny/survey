@@ -6,8 +6,17 @@ module HummingbirdSurvey
       belongs_to :survey
     end
 
+    def responses_for_surveyed(surveyed_obj)
+      responses = []
+      questions.each do |question|
+        responses << { answer: answer_for_question(surveyed_obj, question.id), question: question }
+      end
+      responses
+    end
+
+    # todo put this in a logical order
     def questions
-      SurveyQuestion.where(id: question_ids)
+      SurveyQuestion.joins(:survey_item).order("survey_items.item_number ASC").where(id: question_ids)
     end
 
     def question_ids
