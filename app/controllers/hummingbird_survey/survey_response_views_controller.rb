@@ -71,6 +71,6 @@ class HummingbirdSurvey::SurveyResponseViewsController < HummingbirdSurvey::Base
   end
 
   def survey_response_view_params
-    params[:survey_response_view].present? ? params.require(:survey_response_view).permit(:name, :survey_id, data: {} ) : {}
+    params[:survey_response_view].present? ? params.require(:survey_response_view).permit(:name, :internal_description, :survey_id, data: {} ) : {}
   end
 end
