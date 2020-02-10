@@ -4,6 +4,8 @@ module HummingbirdSurvey
 
     included do
       belongs_to :survey
+
+      validates :name, presence: true
     end
 
     def responses_for_surveyed(surveyed_obj)
