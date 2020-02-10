@@ -3,6 +3,15 @@ module HummingbirdSurvey
     extend ActiveSupport::Concern
 
     included do
+
+      COLUMNS = {
+        hint: {
+          hint: ""
+        }
+      }
+
+      store_accessor :data, *COLUMNS.keys
+
       has_one :survey_item, as: :survey_itemable
       has_many :survey_question_options
 
@@ -17,6 +26,12 @@ module HummingbirdSurvey
       accepts_nested_attributes_for :survey_question_options, allow_destroy: true
 
       # validates :label, :question_type, presence: true
+    end
+
+    module ClassMethods
+      def data_fields
+        COLUMNS.keys
+      end
     end
 
     def survey_page

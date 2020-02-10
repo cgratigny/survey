@@ -6,6 +6,7 @@
   .block.as-section
     .form-inputs
       = f.input :label
+      = f.input :hint
       = f.input :required
       = f.input :question_type, as: :select, collection: SurveyQuestionType.select_options
 
