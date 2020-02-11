@@ -16,10 +16,6 @@ class HummingbirdSurvey::SurveyResponseViewsController < HummingbirdSurvey::Base
   end
 
   def create
-
-  end
-
-  def create
     respond_to do |format|
       if @survey_response_view.save
         format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey view was successfully created.' }
