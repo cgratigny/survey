@@ -1,0 +1,7 @@
+.page-content-head
+  %h1 Editing Survey Response View
+
+  .button-group
+    = link_to 'Back', edit_staff_survey_path(@survey), class: "back-button btn btn-primary button-group-item"
+
+.primary-form-type.full-page-form.using-blocks= render 'form'
