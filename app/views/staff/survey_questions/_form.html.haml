@@ -7,6 +7,7 @@
     .form-inputs
       = f.input :label
       = f.input :hint
+      = f.input :response_view_name, label: "Response View Label", hint: "If you have any response views, if you add a question here it will override the question displayed on the response views."
       = f.input :required
       = f.input :question_type, as: :select, collection: SurveyQuestionType.select_options
 

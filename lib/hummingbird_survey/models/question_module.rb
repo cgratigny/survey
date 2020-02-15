@@ -7,6 +7,9 @@ module HummingbirdSurvey
       COLUMNS = {
         hint: {
           hint: ""
+        },
+        response_view_name: {
+          hint: ""
         }
       }
 
@@ -32,6 +35,10 @@ module HummingbirdSurvey
       def data_fields
         COLUMNS.keys
       end
+    end
+
+    def response_view_label
+      self.response_view_name.present? ? self.response_view_name : self.label
     end
 
     def survey_page
