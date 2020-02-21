@@ -61,7 +61,7 @@ module HummingbirdSurvey
     # needs a hash where the keys are in the form of "question_#{question_id}"
     # and the values are the answers to that particular question.
     def display?(flat_answer_data)
-      if flat_answer_data.is_a?(Hash)
+      if flat_answer_data.is_a?(Hash) && condition.present?
         given_value = flat_answer_data["question_#{survey_question_id}"]
 
         condition.resolve(target_value.to_s.upcase, given_value.to_s.upcase)
