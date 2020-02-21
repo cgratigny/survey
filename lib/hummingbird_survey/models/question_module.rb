@@ -10,7 +10,8 @@ module HummingbirdSurvey
         },
         response_view_name: {
           hint: ""
-        }
+        },
+        answer_limit: { }
       }
 
       store_accessor :data, *COLUMNS.keys
