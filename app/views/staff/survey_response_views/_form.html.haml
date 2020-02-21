@@ -1,0 +1,19 @@
+-# frozen_string_literal: true
+= simple_form_for [:staff, @survey, @survey_response_view] do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .block.as-section
+    .form-inputs
+      = f.input :name
+      = f.input :internal_description
+
+  .block.as-section
+    .form-inputs
+      = f.simple_fields_for :data do |data_f|
+        = data_f.simple_fields_for :questions do |question_f|
+          - f.object.survey.survey_questions.each do |survey_question|
+            = question_f.input :"#{survey_question.id}", as: :boolean, label: survey_question.label, input_html: { value: survey_question.id, checked: f.object.question_enabled?(survey_question) }
+
+
+  = render "common/global_form_submit", f: f
