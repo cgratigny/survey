@@ -111,6 +111,7 @@ module HummingbirdSurvey
           errors.add(question.qkey.to_sym, "is required") if question.actually_required?(all_answer_data) && send(question.qkey.to_sym).to_s != "1"
         elsif question.question_type.multi_select?
           errors.add(question.qkey.to_sym, "is required") if question.actually_required?(all_answer_data) && (send(question.qkey.to_sym).blank? || send(question.qkey.to_sym).empty?)
+          errors.add(question.qkey.to_sym, "cannot have more than #{question.answer_limit.to_i} responses") if question.answer_limit.to_i > 0 && (send(question.qkey.to_sym).count > question.answer_limit.to_i)
         else
           errors.add(question.qkey.to_sym, "is required") if question.actually_required?(all_answer_data) && send(question.qkey.to_sym).blank?
         end
