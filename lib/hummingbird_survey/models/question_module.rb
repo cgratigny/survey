@@ -11,7 +11,8 @@ module HummingbirdSurvey
         response_view_name: {
           hint: ""
         },
-        answer_limit: { }
+        answer_limit: {},
+        character_limit: {}
       }
 
       store_accessor :data, *COLUMNS.keys
@@ -56,6 +57,10 @@ module HummingbirdSurvey
 
     def requires_answer_list?
       question_type.present? ? question_type.requires_answer_list? : false
+    end
+
+    def requires_character_limit?
+      question_type.present? ? question_type.requires_character_limit? : false
     end
 
     def requires_country_link?

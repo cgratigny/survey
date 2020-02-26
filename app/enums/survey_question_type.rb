@@ -3,6 +3,10 @@ class SurveyQuestionType < ClassyEnum::Base
     false
   end
 
+  def requires_character_limit?
+    false
+  end
+
   def response_partial
     :default
   end
@@ -58,6 +62,10 @@ end
 class SurveyQuestionType::TextArea < SurveyQuestionType
   def text
     "Paragraph Answer"
+  end
+
+  def requires_character_limit?
+    true
   end
 
   def response_partial
