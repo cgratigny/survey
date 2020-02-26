@@ -1,7 +1,7 @@
 - case survey_itemable.question_type
   - when SurveyQuestionType::TextArea.new
     - if survey_itemable.character_limit.to_i > 0
-      = f.input "question_#{survey_itemable.id}", as: :text, label: survey_itemable.label, required: survey_itemable.required?, hint: "#{survey_itemable.hint} (#{survey_itemable.character_limit.to_i} characters max)"
+      = f.input "question_#{survey_itemable.id}", as: :text, label: survey_itemable.label, required: survey_itemable.required?, hint: "#{survey_itemable.hint} (#{survey_itemable.character_limit.to_i} characters max)", input_html: { maxlength: survey_itemable.character_limit.to_i }
     - else
       = f.input "question_#{survey_itemable.id}", as: :text, label: survey_itemable.label, required: survey_itemable.required?, hint: survey_itemable.hint
   - when SurveyQuestionType::RadioButtons.new
