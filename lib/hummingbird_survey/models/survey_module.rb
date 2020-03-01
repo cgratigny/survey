@@ -113,14 +113,18 @@ module HummingbirdSurvey
       end
     end
 
-    def set_surveyed_data_for!(surveyed_obj, target_data, request = nil)
+    def set_surveyed_data_for!(surveyed_obj, target_data, args = {})
       survey_response = survey_response_for(surveyed_obj)
       return false unless survey_response.present?
 
       survey_response.answers_data = target_data
 
-      if request.present? && request.is_a?(ActionDispatch::Request)
-        survey_response.request_data = { completed_at: Time.zone.now, ip_address: request.remote_ip, browser: request.user_agent, path: request.path }
+      if args[:request].present? && args[:request].is_a?(ActionDispatch::Request)
+        survey_response.request_data = { completed_at: Time.zone.now, ip_address: args[:request].remote_ip, browser: args[:request].user_agent, path: args[:request].path }
+      end
+
+      if args[:current_user].present?
+        survey_response.data = { user_id: args[:current_user].id, full_name: args[:current_user].full_name }
       end
 
       survey_response.save(validate: false)

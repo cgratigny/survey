@@ -1,0 +1,4 @@
+- if response.respond_to?(:versions)
+  %hr
+  %small
+    %div= "Completed by: #{response.versions.last.try(:whodunnit)}"
