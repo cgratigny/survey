@@ -8,6 +8,7 @@ module HummingbirdSurvey
     end
 
     def initialize_survey
+      reload
       return if survey.present?
 
       survey = self.create_survey!(surveyable: self, display_name: self.to_s)
