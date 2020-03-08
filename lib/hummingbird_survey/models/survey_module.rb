@@ -13,6 +13,12 @@ module HummingbirdSurvey
 
       classy_enum_attr :survey_type, enum: "SurveyType", default: 'default'
       accepts_nested_attributes_for :survey_pages, allow_destroy: true
+
+      before_validation :set_survey_type
+    end
+
+    def set_survey_type
+      self.survey_type = :default if survey_type.blank?
     end
 
     def total_page_count
