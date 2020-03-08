@@ -4,6 +4,9 @@ end
 class SurveyType::Default < SurveyType
 end
 
+class SurveyType::Questionnaire < SurveyType
+end
+
 class SurveyType::Quiz < SurveyType
 end
 
