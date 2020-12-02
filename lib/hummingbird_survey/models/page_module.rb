@@ -5,7 +5,7 @@ module HummingbirdSurvey
     included do
       belongs_to :survey
 
-      has_many :survey_items, as: :parent, dependent: :destroy, -> { order: :item_number }
+      has_many :survey_items, as: :parent, dependent: :destroy, -> { order(item_number: :asc) }
 
       after_commit :update_page_numbers
 
