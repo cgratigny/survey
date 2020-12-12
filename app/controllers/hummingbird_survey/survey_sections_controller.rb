@@ -32,7 +32,7 @@ class HummingbirdSurvey::SurveySectionsController < HummingbirdSurvey::BaseContr
   end
 
   def add_question
-    question = SurveyQuestion.create!
+    question = SurveyQuestion.create!(question_type: SurveyQuestionType[:text_field])
     item = SurveyItem.create!(survey_itemable: question, parent: @survey_section, item_number: @survey_section.survey_items.maximum(:item_number).to_i + 1)
 
     redirect_to edit_staff_survey_question_path(@survey, question), notice: 'Survey question was successfully added.'
