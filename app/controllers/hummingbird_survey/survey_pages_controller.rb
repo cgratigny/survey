@@ -16,7 +16,6 @@ class HummingbirdSurvey::SurveyPagesController < HummingbirdSurvey::BaseControll
 
   def create
     respond_to do |format|
-      @survey_page.id = SurveyPage.maximum(:id).to_i + 1 # because this doesn't happen automatically for some reason
       if @survey_page.save
         format.html { redirect_to edit_staff_survey_path(@survey), notice: 'Survey page was successfully created.' }
         format.json { render :show, status: :created, location: @survey_page }
