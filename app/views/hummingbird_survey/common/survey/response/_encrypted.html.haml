@@ -1,5 +1,5 @@
 - decrypted_value = EncryptionService.decrypt(item_options["value"])
-%span.hide.toggle-answer.decrypted-answer{ id: "decrypted-answer-#{item_options["item_number"]}", data: { target: "masked-answer-#{item_options["item_number"]}" } }
+%span.hide.survey-answer-item.toggle-answer.decrypted-answer{ id: "decrypted-answer-#{item_options["item_number"]}", data: { target: "masked-answer-#{item_options["item_number"]}" } }
   = decrypted_value
   %span
     %small
