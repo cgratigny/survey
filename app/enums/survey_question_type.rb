@@ -38,6 +38,9 @@ class SurveyQuestionType::TextField < SurveyQuestionType
   end
 end
 
+class SurveyQuestionType::Note < SurveyQuestionType
+end
+
 class SurveyQuestionType::Review < SurveyQuestionType
 end
 
