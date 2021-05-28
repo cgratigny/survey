@@ -171,6 +171,10 @@ module HummingbirdSurvey
       case item.survey_itemable.question_type
       when SurveyQuestionType::Encrypted.new
         EncryptionService.encrypt(value)
+      when SurveyQuestionType::File.new
+        # handle the file upload here
+        survey_response_attachment = SurveyResponseAttachment.find_or_create_by(survey_question: item.survey_itemable, survey_response: survey.survey_response_for(surveyed))
+        survey_response_attachment.update(attachment: value)
       else
         value
       end
@@ -181,7 +185,7 @@ module HummingbirdSurvey
         "label" => item.survey_itemable.label,
         "question_type" => item.survey_itemable.question_type.to_s,
         "value" => answer_value(all_answer_data["question_#{item.survey_itemable.id}"], item),
-        "question_id" => item.survey_itemable.id,
+        "question_id" => item.survey_itemable.id
       })
     end
 

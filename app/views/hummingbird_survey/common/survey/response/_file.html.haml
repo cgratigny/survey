@@ -1,0 +1,7 @@
+- survey_response_attachment = SurveyResponseAttachment.find_by_item_options_survey_response(item_options, survey_response)
+
+- if survey_response_attachment.present?
+  = link_to attachment_url(survey_response_attachment.attachment.attachment, host: Tenant.get(:host)), target: :_blank do
+    = image_tag(attachment_url(survey_response_attachment.attachment.attachment, variant: :profile), class: "img-responsive", id: "profile-photo", skip_pipeline: true)
+    %br
+    View

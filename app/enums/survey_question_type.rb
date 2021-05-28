@@ -41,6 +41,13 @@ end
 class SurveyQuestionType::Note < SurveyQuestionType
 end
 
+class SurveyQuestionType::File < SurveyQuestionType
+  def response_partial
+    :file
+  end
+
+end
+
 class SurveyQuestionType::Review < SurveyQuestionType
 end
 

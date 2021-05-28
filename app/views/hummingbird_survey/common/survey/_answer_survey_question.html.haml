@@ -9,7 +9,9 @@
   - when SurveyQuestionType::MultiSelect.new
     = f.input "question_#{survey_itemable.id}", as: :multi_select, label: survey_itemable.label.to_s.html_safe, item_wrapper_class: "inline", collection: survey_itemable.answer_list, required: survey_itemable.required?, hint: survey_itemable.hint
   - when SurveyQuestionType::Checkbox.new
-    = f.input "question_#{survey_itemable.id}", as: :boolean, label: false, item_wrapper_class: "inline", label_method: :to_s, value_method: :to_s, inline_label: survey_itemable.label.to_s.html_safe, required: true, hint: survey_itemable.hint
+    = f.input "question_#{survey_itemable.id}", as: :boolean, label: survey_itemable.label.to_s.html_safe, required: true, hint: survey_itemable.hint
+  - when SurveyQuestionType::File.new
+    = f.input "question_#{survey_itemable.id}", as: :file, label: survey_itemable.label.to_s.html_safe, required: survey_itemable.required?, hint: survey_itemable.hint
   - when SurveyQuestionType::Select.new
     = f.input "question_#{survey_itemable.id}", as: :select, label: survey_itemable.label.to_s.html_safe, required: survey_itemable.required?, item_wrapper_class: "inline", collection: survey_itemable.answer_list, label_method: :to_s, value_method: :to_s, input_html: { "data-placeholder" => "Please Select" }, hint: survey_itemable.hint
   - when SurveyQuestionType::Signature.new
